@@ -1,0 +1,143 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Timeline", href: "#timeline" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<header
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent"
+>
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a
+      href="#"
+      class="text-xl font-bold text-primary-600 dark:text-primary-400 tracking-tight hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+    >
+      &lt;Irfan /&gt;
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 dark:after:bg-primary-400 after:transition-all after:duration-300 hover:after:w-full"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </div>
+
+    <!-- Mobile menu button -->
+    <div class="flex items-center gap-3 md:hidden">
+      <ThemeToggle />
+      <button
+        id="mobile-toggle"
+        aria-label="Toggle menu"
+        class="relative w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm cursor-pointer"
+      >
+        <div class="hamburger-lines flex flex-col gap-1.5 w-5">
+          <span
+            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center"
+          ></span>
+          <span
+            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300"
+          ></span>
+          <span
+            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu panel -->
+  <div
+    id="mobile-menu"
+    class="md:hidden overflow-hidden max-h-0 transition-all duration-500 bg-white/95 dark:bg-dark-secondary/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800"
+  >
+    <div class="px-6 py-4 flex flex-col gap-2">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="mobile-link py-3 px-4 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-slate-800 transition-all"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Scroll effect
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      header?.classList.add(
+        "bg-white/80",
+        "dark:bg-dark-secondary/80",
+        "backdrop-blur-xl",
+        "shadow-sm",
+        "border-slate-100",
+        "dark:border-slate-800",
+      );
+      header?.classList.remove("border-transparent");
+    } else {
+      header?.classList.remove(
+        "bg-white/80",
+        "dark:bg-dark-secondary/80",
+        "backdrop-blur-xl",
+        "shadow-sm",
+        "border-slate-100",
+        "dark:border-slate-800",
+      );
+      header?.classList.add("border-transparent");
+    }
+  });
+
+  // Mobile menu
+  const toggle = document.getElementById("mobile-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const lines = toggle?.querySelectorAll(".hamburger-lines span");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.contains("max-h-96");
+    if (isOpen) {
+      menu?.classList.remove("max-h-96");
+      menu?.classList.add("max-h-0");
+      lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
+      lines?.[1]?.classList.remove("opacity-0");
+      lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");
+    } else {
+      menu?.classList.remove("max-h-0");
+      menu?.classList.add("max-h-96");
+      lines?.[0]?.classList.add("rotate-45", "translate-y-2");
+      lines?.[1]?.classList.add("opacity-0");
+      lines?.[2]?.classList.add("-rotate-45", "-translate-y-2");
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.remove("max-h-96");
+      menu?.classList.add("max-h-0");
+      lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
+      lines?.[1]?.classList.remove("opacity-0");
+      lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");
+    });
+  });
+</script>
