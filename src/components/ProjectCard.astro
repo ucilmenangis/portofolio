@@ -1,16 +1,18 @@
 ---
 import type { Project } from "../data/projects";
+import { Image } from "astro:assets";
 
 interface Props {
   project: Project;
   index: number;
+  className?: string; // Bento layout class
 }
 
-const { project, index } = Astro.props;
+const { project, index, className = "" } = Astro.props;
 ---
 
 <div
-  class="reveal group rounded-xl overflow-hidden bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1"
+  class={`reveal group flex flex-col rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/20 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-primary-300 dark:hover:border-primary-500/50 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1 ${className}`}
   style={`animation-delay: ${index * 0.1}s;`}
 >
   <!-- Project image -->
@@ -19,9 +21,11 @@ const { project, index } = Astro.props;
   >
     {
       project.image ? (
-        <img
+        <Image
           src={project.image}
           alt={project.title}
+          width={800}
+          height={450}
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
@@ -109,12 +113,18 @@ const { project, index } = Astro.props;
     </p>
 
     <!-- Tech badges -->
-    <div class="flex flex-wrap gap-1.5">
+    <div
+      class="flex flex-wrap gap-2 pt-2 border-t border-slate-100 dark:border-slate-700/50 mt-4"
+    >
       {
         project.tech.map((t) => (
-          <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-700">
-            {t}
-          </span>
+          <img
+            src={`https://skillicons.dev/icons?i=${t}`}
+            alt={t}
+            title={t}
+            class="w-6 h-6 hover:scale-110 transition-transform"
+            loading="lazy"
+          />
         ))
       }
     </div>

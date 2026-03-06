@@ -6,6 +6,7 @@ export interface TimelineEntry {
     location?: string;
     description: string;
     tags?: string[];
+    tech?: string[];
 }
 
 export const timeline: TimelineEntry[] = [
@@ -17,6 +18,7 @@ export const timeline: TimelineEntry[] = [
         location: "Jakarta, Indonesia · Remote",
         description: "Freelance full stack development work.",
         tags: ["Freelance", "Remote"],
+        tech: ["laravel", "php", "mysql", "bootstrap"],
     },
     {
         type: "education",
@@ -36,6 +38,7 @@ export const timeline: TimelineEntry[] = [
         description:
             "Internship developing a YouTube-like application for the company. Worked on web services and mobile application development.",
         tags: ["Internship", "6 months"],
+        tech: ["php", "kotlin", "html", "css"],
     },
     {
         type: "education",
@@ -46,5 +49,6 @@ export const timeline: TimelineEntry[] = [
         description:
             "Graduated with Rank 7. Completed a 5-month internship program. Focused on Mobile Application Development and Web Services.",
         tags: ["Graduated", "Rank 7"],
+        tech: ["java", "python", "kotlin", "flutter", "html", "css"],
     },
 ];

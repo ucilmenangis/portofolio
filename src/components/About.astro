@@ -1,5 +1,5 @@
 ---
-
+import { Image } from "astro:assets";
 ---
 
 <section id="about" class="py-24 bg-surface-secondary dark:bg-dark-secondary">
@@ -142,5 +142,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- GitHub Contributions -->
+        <div class="reveal mt-16 w-full max-w-4xl mx-auto hidden sm:block">
+            <h3
+                class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center"
+            >
+                GitHub Contributions
+            </h3>
+            <div
+                class="rounded-xl border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm p-6 overflow-x-auto hover:shadow-lg transition-all duration-300"
+            >
+                <Image
+                    src="https://ghchart.rshah.org/40c463/ucilmenangis"
+                    alt="GitHub Contribution Graph"
+                    inferSize={true}
+                    class="w-full min-w-[700px] mx-auto filter dark:opacity-90 saturate-150 contrast-125 transition-all duration-300 hover:scale-[1.01]"
+                    loading="lazy"
+                />
+            </div>
+        </div>
     </div>
 </section>
+```

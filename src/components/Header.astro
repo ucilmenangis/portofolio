@@ -1,5 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
+import { Image } from "astro:assets";
+import avatarImg from "../../public/images/avatar.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -18,9 +20,17 @@ const navLinks = [
     <!-- Logo -->
     <a
       href="#"
-      class="text-xl font-bold text-primary-600 dark:text-primary-400 tracking-tight hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+      class="flex items-center gap-2 hover:scale-105 transition-transform"
     >
-      &lt;Irfan /&gt;
+      <Image
+        src={avatarImg}
+        alt="Irfan"
+        class="w-9 h-9 object-cover rounded-full border-2 border-primary-500"
+      />
+      <span
+        class="text-xl font-bold bg-gradient-to-r from-primary-600 to-violet-500 bg-clip-text text-transparent tracking-tight hidden sm:block"
+        >Irfan</span
+      >
     </a>
 
     <!-- Desktop nav -->
