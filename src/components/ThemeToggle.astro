@@ -3,9 +3,8 @@
 ---
 
 <button
-  id="theme-toggle"
   aria-label="Toggle dark mode"
-  class="relative w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-md"
+  class="theme-toggle-btn relative w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-md"
 >
   <!-- Sun icon -->
   <svg
@@ -35,13 +34,17 @@
   </svg>
 </button>
 
-<script is:inline>
-  document.getElementById("theme-toggle")?.addEventListener("click", () => {
-    const html = document.documentElement;
-    html.classList.toggle("dark");
-    localStorage.setItem(
-      "theme",
-      html.classList.contains("dark") ? "dark" : "light",
-    );
+<script>
+  // Astro automatically deduplicates this module script so it runs exactly once
+  // per page, correctly mounting all ThemeToggle buttons!
+  document.querySelectorAll(".theme-toggle-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const html = document.documentElement;
+      html.classList.toggle("dark");
+      localStorage.setItem(
+        "theme",
+        html.classList.contains("dark") ? "dark" : "light",
+      );
+    });
   });
 </script>
