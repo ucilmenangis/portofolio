@@ -29,7 +29,7 @@ export const projects: Project[] = [
         title: "DeceasedCraft Server",
         description:
             "A custom Minecraft server project built for friends and personal use. Configured and managed game server with custom scripts and settings.",
-        tech: ["js", "nodejs"],
+        tech: ["java", "js", "nodejs"],
         image: "/images/projects/deceasedcraft.png",
         github: "https://github.com/ucilmenangis/DeceasedCraft-Server-5.10",
     },

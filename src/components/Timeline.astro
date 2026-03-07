@@ -1,5 +1,21 @@
 ---
 import { timeline as timelineItems } from "../data/timeline";
+import { Image } from "astro:assets";
+
+const skillNames: Record<string, string> = {
+  php: "PHP",
+  js: "JavaScript",
+  laravel: "Laravel",
+  mysql: "MySQL",
+  css: "CSS",
+  html: "HTML",
+  nodejs: "Node.js",
+  java: "Java",
+  python: "Python",
+  kotlin: "Kotlin",
+  flutter: "Flutter",
+  bootstrap: "Bootstrap",
+};
 ---
 
 <section
@@ -86,13 +102,20 @@ import { timeline as timelineItems } from "../data/timeline";
                 {item.tech && item.tech.length > 0 && (
                   <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-700/50">
                     {item.tech.map((t) => (
-                      <img
-                        src={`https://skillicons.dev/icons?i=${t}`}
-                        alt={t}
-                        title={t}
-                        class="w-7 h-7 hover:scale-110 transition-transform"
-                        loading="lazy"
-                      />
+                      <div class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:scale-105 transition-transform">
+                        <Image
+                          src={`https://skillicons.dev/icons?i=${t}`}
+                          alt={t}
+                          title={t}
+                          width={24}
+                          height={24}
+                          class="w-6 h-6"
+                          loading="lazy"
+                        />
+                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                          {skillNames[t] || t.toUpperCase()}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 )}

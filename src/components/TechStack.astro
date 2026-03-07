@@ -1,5 +1,6 @@
 ---
 import { skillCategories } from "../data/skills";
+import { Image } from "astro:assets";
 ---
 
 <section id="skills" class="py-24">
@@ -34,9 +35,11 @@ import { skillCategories } from "../data/skills";
                         <div class="flex flex-wrap gap-2.5">
                             {category.skills.map((skill) => (
                                 <div class="group flex flex-col items-center justify-center p-4 rounded-2xl bg-white/50 dark:bg-slate-800/30 border border-slate-200/50 dark:border-slate-700/50 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10 cursor-default">
-                                    <img
+                                    <Image
                                         src={`https://skillicons.dev/icons?i=${skill.icon}`}
                                         alt={skill.name}
+                                        width={48}
+                                        height={48}
                                         class="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
                                         loading="eager"
                                     />

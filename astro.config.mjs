@@ -8,6 +8,6 @@ export default defineConfig({
         plugins: [tailwindcss()],
     },
     image: {
-        domains: ['ghchart.rshah.org'],
+        domains: ['ghchart.rshah.org', 'skillicons.dev'],
     },
 });
