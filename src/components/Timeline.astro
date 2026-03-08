@@ -1,6 +1,7 @@
 ---
 import { timeline as timelineItems } from "../data/timeline";
 import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
 
 const skillNames: Record<string, string> = {
   php: "PHP",
@@ -52,7 +53,7 @@ const skillNames: Record<string, string> = {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                   <div class="flex items-center gap-3">
                     <span
-                      class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${isWork ? "bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-800/50" : "bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/50 dark:border-emerald-800/50"}`}
+                      class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${isWork ? "bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-800/50" : "bg-slate-100 dark:bg-slate-800/40 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"}`}
                     >
                       {isWork ? "Work" : "Education"}
                     </span>
@@ -71,25 +72,7 @@ const skillNames: Record<string, string> = {
 
                 {item.location && (
                   <p class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-4 h-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                      />
-                    </svg>
+                    <Icon name="map-pin" class="w-4 h-4" />
                     {item.location}
                   </p>
                 )}
@@ -103,12 +86,12 @@ const skillNames: Record<string, string> = {
                   <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-700/50">
                     {item.tech.map((t) => (
                       <div class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:scale-105 transition-transform">
-                        <Image
+                        <img
                           src={`https://skillicons.dev/icons?i=${t}`}
                           alt={t}
                           title={t}
-                          width={24}
-                          height={24}
+                          width="24"
+                          height="24"
                           class="w-6 h-6"
                           loading="lazy"
                         />
@@ -129,37 +112,11 @@ const skillNames: Record<string, string> = {
                   {/* Next entry's icon */}
                   {timelineItems[index + 1].type === "work" ? (
                     <div class="w-12 h-12 rounded-full border-4 border-white dark:border-dark-secondary bg-primary-100 dark:bg-primary-900 flex items-center justify-center z-10 shadow-sm text-primary-600 dark:text-primary-400 my-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"
-                        />
-                      </svg>
+                      <Icon name="briefcase" class="w-5 h-5" />
                     </div>
                   ) : (
-                    <div class="w-12 h-12 rounded-full border-4 border-white dark:border-dark-secondary bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center z-10 shadow-sm text-emerald-600 dark:text-emerald-400 my-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                        />
-                      </svg>
+                    <div class="w-12 h-12 rounded-full border-4 border-white dark:border-dark-secondary bg-slate-100 dark:bg-slate-800 flex items-center justify-center z-10 shadow-sm text-slate-600 dark:text-slate-400 my-1">
+                      <Icon name="graduation-cap" class="w-5 h-5" />
                     </div>
                   )}
 

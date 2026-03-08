@@ -37,6 +37,7 @@ export const skillCategories: SkillCategory[] = [
     {
         title: 'Tools',
         skills: [
+            { name: 'Antigravity', icon: 'bash' },
             { name: 'MySQL', icon: 'mysql' },
             { name: 'Git', icon: 'git' },
             { name: 'Vite', icon: 'vite' },
