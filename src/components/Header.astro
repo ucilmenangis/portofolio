@@ -25,11 +25,11 @@ const navLinks = [
       <Image
         src={avatarImg}
         alt="Irfan"
-        class="w-9 h-9 object-cover rounded-full border-2 border-primary-500"
+        class="w-9 h-9 object-cover rounded-full border-1 border-primary-700"
         loading="eager"
       />
       <span
-        class="text-xl font-bold bg-linear-to-r from-primary-600 to-slate-400 bg-clip-text text-transparent tracking-tight hidden sm:block"
+        class="text-xl font-bold bg-linear-to-r from-primary-600 to-slate-400 bg-clip-text text-transparent tracking-tight hidden sm:block text-shadow-lg"
         >Irfan</span
       >
     </a>
@@ -40,7 +40,7 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 dark:after:bg-primary-400 after:transition-all after:duration-300 hover:after:w-full"
+            class="text-sm font-medium text-slate-600 dark:text-slate-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 dark:after:bg-primary-400 after:transition-all after:duration-300 hover:after:w-full"
           >
             {link.label}
           </a>
