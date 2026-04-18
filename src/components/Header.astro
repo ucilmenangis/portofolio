@@ -14,22 +14,22 @@ const navLinks = [
 
 <header
   id="header"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent"
+  class="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-4xl z-50 transition-all duration-500 border border-white/20 dark:border-white/10 rounded-full bg-white/40 dark:bg-dark-secondary/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(30,64,175,0.2)]"
 >
-  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+  <nav class="px-6 h-14 flex items-center justify-between">
     <!-- Logo -->
     <a
       href="#"
-      class="flex items-center gap-2 hover:scale-105 transition-transform"
+      class="flex items-center gap-3 hover:scale-105 transition-transform"
     >
       <Image
         src={avatarImg}
         alt="Irfan"
-        class="w-9 h-9 object-cover rounded-full border border-primary-700"
+        class="w-10 h-10 object-cover rounded-full border-2 border-primary-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
         loading="eager"
       />
       <span
-        class="text-xl font-bold bg-linear-to-r from-primary-800 via-primary-600 to-primary-400 bg-clip-text text-transparent tracking-tight hidden sm:block text-shadow-lg"
+        class="text-xl font-bold bg-linear-to-r from-primary-600 via-primary-500 to-accent-neon bg-clip-text text-transparent tracking-tight hidden sm:block drop-shadow-sm"
         >Irfan</span
       >
     </a>
@@ -40,7 +40,7 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm font-medium text-slate-600 dark:text-slate-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary-600 dark:after:bg-primary-400 after:transition-all after:duration-300 hover:after:w-full"
+            class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-linear-to-r after:from-primary-500 after:to-accent-neon after:transition-all after:duration-300 hover:after:w-full hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"
           >
             {link.label}
           </a>
@@ -55,17 +55,17 @@ const navLinks = [
       <button
         id="mobile-toggle"
         aria-label="Toggle menu"
-        class="relative w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm cursor-pointer"
+        class="relative w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md cursor-pointer hover:shadow-[0_0_10px_rgba(59,130,246,0.3)] transition-all"
       >
         <div class="hamburger-lines flex flex-col gap-1.5 w-5">
           <span
-            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center"
+            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 origin-center rounded-full"
           ></span>
           <span
-            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300"
+            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 rounded-full"
           ></span>
           <span
-            class="block h-0.5 w-full bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center"
+            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 origin-center rounded-full"
           ></span>
         </div>
       </button>
@@ -75,14 +75,14 @@ const navLinks = [
   <!-- Mobile menu panel -->
   <div
     id="mobile-menu"
-    class="md:hidden overflow-hidden max-h-0 transition-all duration-500 bg-white/95 dark:bg-dark-secondary/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800"
+    class="md:hidden overflow-hidden max-h-0 transition-all duration-500 absolute top-full mt-4 left-0 right-0 bg-white/70 dark:bg-dark-secondary/70 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl shadow-xl dark:shadow-[0_0_20px_rgba(59,130,246,0.15)]"
   >
-    <div class="px-6 py-4 flex flex-col gap-2">
+    <div class="px-4 py-4 flex flex-col gap-1">
       {
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="mobile-link py-3 px-4 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-slate-800 transition-all"
+            class="mobile-link py-3 px-4 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all active:scale-95"
           >
             {link.label}
           </a>
@@ -93,29 +93,25 @@ const navLinks = [
 </header>
 
 <script is:inline>
-  // Scroll effect
+  // Scroll effect to shrink pill slightly and increase opacity
   const header = document.getElementById("header");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
       header?.classList.add(
         "bg-white/80",
         "dark:bg-dark-secondary/80",
-        "backdrop-blur-xl",
-        "shadow-sm",
-        "border-slate-100",
-        "dark:border-slate-800",
+        "py-1",
+        "shadow-lg"
       );
-      header?.classList.remove("border-transparent");
+      header?.classList.remove("bg-white/40", "dark:bg-dark-secondary/40");
     } else {
       header?.classList.remove(
         "bg-white/80",
         "dark:bg-dark-secondary/80",
-        "backdrop-blur-xl",
-        "shadow-sm",
-        "border-slate-100",
-        "dark:border-slate-800",
+        "py-1",
+        "shadow-lg"
       );
-      header?.classList.add("border-transparent");
+      header?.classList.add("bg-white/40", "dark:bg-dark-secondary/40");
     }
   });
 
@@ -127,14 +123,14 @@ const navLinks = [
   toggle?.addEventListener("click", () => {
     const isOpen = menu?.classList.contains("max-h-96");
     if (isOpen) {
-      menu?.classList.remove("max-h-96");
+      menu?.classList.remove("max-h-96", "p-2");
       menu?.classList.add("max-h-0");
       lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
       lines?.[1]?.classList.remove("opacity-0");
       lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");
     } else {
       menu?.classList.remove("max-h-0");
-      menu?.classList.add("max-h-96");
+      menu?.classList.add("max-h-96", "p-2");
       lines?.[0]?.classList.add("rotate-45", "translate-y-2");
       lines?.[1]?.classList.add("opacity-0");
       lines?.[2]?.classList.add("-rotate-45", "-translate-y-2");
@@ -144,7 +140,7 @@ const navLinks = [
   // Close mobile menu on link click
   document.querySelectorAll(".mobile-link").forEach((link) => {
     link.addEventListener("click", () => {
-      menu?.classList.remove("max-h-96");
+      menu?.classList.remove("max-h-96", "p-2");
       menu?.classList.add("max-h-0");
       lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
       lines?.[1]?.classList.remove("opacity-0");

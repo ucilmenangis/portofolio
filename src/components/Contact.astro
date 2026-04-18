@@ -2,68 +2,78 @@
 import Icon from "./Icon.astro";
 ---
 
-<section id="contact" class="py-24">
-  <div class="max-w-4xl mx-auto px-6">
+<section id="contact" class="py-24 relative">
+  <div class="absolute inset-0 bg-surface/50 dark:bg-dark/50 -z-10"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] -z-10"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-primary-400/10 dark:bg-accent-neon/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-6 relative z-10">
     <!-- Section header -->
-    <div class="reveal text-center mb-16">
+    <div class="reveal text-center mb-20">
       <h2
-        class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3"
+        class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-4"
       >
         Get In Touch
       </h2>
-      <div class="w-12 h-1 bg-primary-600 rounded-full mx-auto mb-4"></div>
-      <p class="text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+      <div class="w-16 h-1.5 bg-linear-to-r from-primary-600 to-accent-neon rounded-full mx-auto mb-6 drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]"></div>
+      <p class="text-slate-600 dark:text-slate-400 max-w-lg mx-auto font-medium text-lg">
         Have a project in mind or want to collaborate? Feel free to reach out —
         I'm always open to new opportunities.
       </p>
     </div>
 
     <!-- Contact content -->
-    <div class="reveal grid md:grid-cols-2 gap-8 items-center">
+    <div class="reveal grid md:grid-cols-2 gap-12 items-center">
       <!-- Email CTA -->
       <div class="text-center md:text-left">
-        <p class="text-lg text-slate-600 dark:text-slate-300 mb-6">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 text-primary-700 dark:text-primary-300 text-sm font-bold uppercase tracking-widest mb-6">
+          <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+          Let's talk
+        </div>
+        <p class="text-xl sm:text-2xl font-semibold text-slate-700 dark:text-slate-200 mb-8 leading-relaxed">
           The best way to reach me is via email. I'll get back to you as soon as
           possible.
         </p>
         <a
           href="mailto:ucilmenangis@gmail.com"
-          class="inline-flex items-center gap-3 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5 text-lg"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-primary-600 to-accent-neon text-white font-bold rounded-2xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] hover:-translate-y-1 text-lg group relative overflow-hidden"
         >
-          <Icon name="mail" class="w-5 h-5 shrink-0" />
-          Email Me
+          <div class="absolute inset-0 w-full h-full bg-white/20 blur-md -skew-x-[30deg] -translate-x-full group-hover:animate-glare"></div>
+          <Icon name="mail" class="w-6 h-6 shrink-0 relative z-10" />
+          <span class="relative z-10">Email Me</span>
         </a>
       </div>
 
       <!-- Social links -->
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-4">
         <a
           href="https://github.com/ucilmenangis"
           target="_blank"
           rel="noopener noreferrer"
-          class="group flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all duration-300"
+          class="group flex items-center gap-5 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 hover:border-primary-400 dark:hover:border-accent-neon hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_10px_30px_rgba(139,92,246,0.2)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
         >
+          <div class="absolute inset-0 bg-linear-to-r from-transparent to-white/40 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
           <div
-            class="w-10 h-10 rounded-lg bg-primary-800 dark:bg-primary-50 flex items-center justify-center shrink-0"
+            class="w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/50 transition-colors shadow-sm"
           >
             <Icon
               name="github"
-              class="w-5 h-5 text-white dark:text-slate-900"
+              class="w-7 h-7 text-slate-700 dark:text-slate-300 group-hover:text-primary-600 dark:group-hover:text-accent-neon transition-colors"
             />
           </div>
           <div class="flex-1">
             <div
-              class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+              class="text-lg font-bold text-slate-900 dark:text-white group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all"
             >
               GitHub
             </div>
-            <div class="text-xs text-slate-400 dark:text-slate-500">
+            <div class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">
               @ucilmenangis
             </div>
           </div>
           <Icon
             name="chevron-right"
-            class="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
+            class="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 dark:group-hover:text-accent-neon group-hover:translate-x-1.5 transition-all"
           />
         </a>
 
@@ -71,51 +81,53 @@ import Icon from "./Icon.astro";
           href="https://www.linkedin.com/in/irfan-arrafi/"
           target="_blank"
           rel="noopener noreferrer"
-          class="group flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all duration-300"
+          class="group flex items-center gap-5 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 hover:border-primary-400 dark:hover:border-accent-neon hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_10px_30px_rgba(139,92,246,0.2)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
         >
+          <div class="absolute inset-0 bg-linear-to-r from-transparent to-white/40 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
           <div
-            class="w-10 h-10 rounded-lg bg-[#0A66C2] flex items-center justify-center shrink-0"
+            class="w-14 h-14 rounded-xl bg-[#0A66C2]/10 dark:bg-[#0A66C2]/20 flex items-center justify-center shrink-0 group-hover:bg-[#0A66C2] transition-colors shadow-sm"
           >
-            <Icon name="linkedin" class="w-5 h-5 text-white" />
+            <Icon name="linkedin" class="w-7 h-7 text-[#0A66C2] group-hover:text-white transition-colors" />
           </div>
           <div class="flex-1">
             <div
-              class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+              class="text-lg font-bold text-slate-900 dark:text-white group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all"
             >
               LinkedIn
             </div>
-            <div class="text-xs text-slate-400 dark:text-slate-500">
+            <div class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">
               Irfan Ar-Rafi
             </div>
           </div>
           <Icon
             name="chevron-right"
-            class="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
+            class="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 dark:group-hover:text-accent-neon group-hover:translate-x-1.5 transition-all"
           />
         </a>
 
         <a
           href="mailto:ucilmenangis@gmail.com"
-          class="group flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all duration-300"
+          class="group flex items-center gap-5 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 hover:border-primary-400 dark:hover:border-accent-neon hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_10px_30px_rgba(139,92,246,0.2)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
         >
+          <div class="absolute inset-0 bg-linear-to-r from-transparent to-white/40 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
           <div
-            class="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shrink-0"
+            class="w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 group-hover:bg-linear-to-br group-hover:from-primary-600 group-hover:to-accent-neon transition-colors shadow-sm"
           >
-            <Icon name="mail" class="w-5 h-5 text-white" />
+            <Icon name="mail" class="w-7 h-7 text-slate-700 dark:text-slate-300 group-hover:text-white transition-colors" />
           </div>
           <div class="flex-1">
             <div
-              class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+              class="text-lg font-bold text-slate-900 dark:text-white group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all"
             >
               Email
             </div>
-            <div class="text-xs text-slate-400 dark:text-slate-500">
+            <div class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5">
               ucilmenangis@gmail.com
             </div>
           </div>
           <Icon
             name="chevron-right"
-            class="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
+            class="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:text-primary-500 dark:group-hover:text-accent-neon group-hover:translate-x-1.5 transition-all"
           />
         </a>
       </div>

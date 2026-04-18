@@ -3,18 +3,22 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 ---
 
-<section id="about" class="py-24 bg-surface-secondary dark:bg-dark-secondary">
-    <div class="max-w-4xl mx-auto px-6">
+<section id="about" class="py-24 relative">
+    <div class="absolute inset-0 bg-surface-secondary/50 dark:bg-dark-secondary/50 -z-10"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-primary-400/10 dark:bg-accent-neon/5 rounded-full blur-[100px] -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary-400/10 dark:bg-primary-600/5 rounded-full blur-[100px] -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
         <!-- Section header -->
-        <div class="reveal text-center mb-16">
+        <div class="reveal text-center mb-16 relative">
             <h2
-                class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3"
+                class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-4"
             >
                 About Me
             </h2>
-            <div class="w-12 h-1 bg-primary-600 rounded-full mx-auto mb-4">
+            <div class="w-16 h-1.5 bg-linear-to-r from-primary-600 to-accent-neon rounded-full mx-auto mb-4 drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]">
             </div>
-            <p class="text-slate-500 dark:text-slate-400">
+            <p class="text-slate-600 dark:text-slate-400 font-medium">
                 Get to know me a little better
             </p>
         </div>
@@ -22,21 +26,23 @@ import Icon from "./Icon.astro";
         <!-- About content -->
         <div class="reveal grid md:grid-cols-[1fr_auto] gap-12 items-start">
             <!-- Bio text -->
-            <div class="space-y-5">
+            <div class="space-y-6">
                 <p
-                    class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 text-justify"
+                    class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 text-justify font-medium"
                 >
                     A passionate fullstack developer who loves turning ideas
                     into real projects. Currently studying at <span
-                        class="font-semibold text-primary-600 dark:text-primary-400"
-                        >Politeknik Negeri Jember</span
+                        class="font-extrabold text-primary-600 dark:text-accent-neon relative inline-block group"
+                        >Politeknik Negeri Jember
+                        <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-linear-to-r from-primary-600 to-accent-neon origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                        </span
                     >
                     while freelancing as a developer. I enjoy working with both web
                     and mobile technologies, and I'm always eager to learn new things
                     and take on challenging projects.
                 </p>
                 <p
-                    class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 text-justify"
+                    class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 text-justify font-medium"
                 >
                     With experience in web services and mobile application
                     development, I've worked on projects ranging from teaching
@@ -45,25 +51,27 @@ import Icon from "./Icon.astro";
                 </p>
 
                 <!-- Quick info chips -->
-                <div class="flex flex-wrap gap-3 pt-2">
+                <div class="flex flex-wrap gap-3 pt-4">
                     <span
-                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 text-primary-700 dark:text-primary-300 text-sm font-medium"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-semibold shadow-sm"
                     >
-                        <Icon name="map-pin" class="w-4 h-4" />
+                        <Icon name="map-pin" class="w-4 h-4 text-primary-500 dark:text-accent-neon" />
                         Indonesia
                     </span>
                     <span
-                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 text-primary-700 dark:text-primary-300 text-sm font-medium"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white dark:border-white/10 text-slate-700 dark:text-slate-200 text-sm font-semibold shadow-sm"
                     >
-                        <Icon name="graduation-cap" class="w-4 h-4" />
-                        Student at Politeknik Negeri Jember
+                        <Icon name="graduation-cap" class="w-4 h-4 text-primary-500 dark:text-accent-neon" />
+                        Politeknik Negeri Jember
                     </span>
                     <span
-                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 text-green-700 dark:text-green-300 text-sm font-medium"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-green-50/80 dark:bg-green-900/30 backdrop-blur-md border border-green-200 dark:border-green-500/30 text-green-700 dark:text-green-300 text-sm font-semibold shadow-sm"
                     >
                         <span
-                            class="w-2 h-2 rounded-full bg-green-500 animate-pulse"
-                        ></span>
+                            class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse relative"
+                        >
+                            <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
+                        </span>
                         Open to work
                     </span>
                 </div>
@@ -72,43 +80,46 @@ import Icon from "./Icon.astro";
             <!-- Stats -->
             <div class="flex md:flex-col gap-4">
                 <div
-                    class="flex-1 p-5 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 text-center min-w-[100px]"
+                    class="group flex-1 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 text-center min-w-[120px] transition-all hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] dark:hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:border-primary-400 dark:hover:border-accent-neon relative overflow-hidden"
                 >
+                    <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
                     <div
-                        class="text-3xl font-bold text-primary-600 dark:text-primary-100 mb-1"
+                        class="text-3xl font-black bg-linear-to-br from-primary-600 to-accent-neon bg-clip-text text-transparent relative z-10"
                     >
                         3+
                     </div>
                     <div
-                        class="text-xs font-medium text-slate-500 dark:text-slate-100 uppercase tracking-wider"
+                        class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mt-1 relative z-10"
                     >
                         Projects
                     </div>
                 </div>
                 <div
-                    class="flex-1 p-5 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 text-center min-w-[100px]"
+                    class="group flex-1 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 text-center min-w-[120px] transition-all hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] dark:hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:border-primary-400 dark:hover:border-accent-neon relative overflow-hidden"
                 >
+                    <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
                     <div
-                        class="text-3xl font-bold text-primary-600 dark:text-primary-100 mb-1"
+                        class="text-3xl font-black bg-linear-to-br from-primary-600 to-accent-neon bg-clip-text text-transparent relative z-10"
                     >
                         1+
                     </div>
                     <div
-                        class="text-xs font-medium text-slate-500 dark:text-slate-100 uppercase tracking-wider"
+                        class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mt-1 relative z-10"
                     >
                         Years Exp
                     </div>
                 </div>
                 <div
-                    class="flex-1 p-5 rounded-xl bg-white dark:bg-dark-tertiary border border-slate-100 dark:border-slate-700 text-center min-w-[100px]"
+                    class="group flex-1 p-5 rounded-2xl bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl border border-white dark:border-white/10 text-center min-w-[120px] transition-all hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] dark:hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:border-primary-400 dark:hover:border-accent-neon relative overflow-hidden"
                 >
+                    <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay"></div>
                     <div
-                        class="text-3xl font-bold text-primary-600 dark:text-primary-100 mb-1"
+                        class="text-3xl font-black bg-linear-to-br from-primary-600 to-accent-neon bg-clip-text text-transparent relative z-10"
                     >
                         10+
                     </div>
                     <div
-                        class="text-xs font-medium text-slate-500 dark:text-slate-100 uppercase tracking-wider"
+                        class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mt-1 relative z-10"
                     >
                         Technologies
                     </div>
@@ -117,20 +128,21 @@ import Icon from "./Icon.astro";
         </div>
 
         <!-- GitHub Contributions -->
-        <div class="reveal mt-16 w-full max-w-4xl mx-auto hidden sm:block">
+        <div class="reveal mt-20 w-full max-w-4xl mx-auto hidden sm:block">
             <h3
                 class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center"
             >
                 GitHub Contributions
             </h3>
             <div
-                class="rounded-xl border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm p-6 overflow-x-auto hover:shadow-lg transition-all duration-300"
+                class="group rounded-2xl border border-white/60 dark:border-white/10 bg-white/40 dark:bg-dark-card/60 backdrop-blur-xl p-6 overflow-x-auto hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] hover:border-primary-400 dark:hover:border-accent-neon transition-all duration-500 relative"
             >
+                <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay rounded-2xl"></div>
                 <Image
-                    src="https://ghchart.rshah.org/40c463/ucilmenangis"
+                    src="https://ghchart.rshah.org/3b82f6/ucilmenangis"
                     alt="GitHub Contribution Graph"
                     inferSize={true}
-                    class="w-full min-w-[700px] mx-auto filter dark:opacity-90 saturate-150 contrast-125 transition-all duration-300 hover:scale-[1.01]"
+                    class="w-full min-w-[700px] mx-auto transition-transform duration-500 group-hover:scale-[1.01] relative z-10 drop-shadow-sm"
                     loading="lazy"
                 />
             </div>

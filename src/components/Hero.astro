@@ -11,43 +11,33 @@ import avatarImg from "../../public/images/avatar.png";
     <!-- Animated background mesh -->
     <div class="absolute inset-0 -z-10">
         <div
-            class="absolute top-1/4 -left-20 w-72 h-72 bg-primary-400/20 dark:bg-primary-600/10 rounded-full blur-3xl animate-float"
+            class="absolute top-1/4 -left-20 w-72 h-72 bg-primary-400/30 dark:bg-primary-600/20 rounded-full blur-[80px] animate-float-glow"
         >
         </div>
         <div
-            class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary-200/15 dark:bg-primary-700/10 rounded-full blur-3xl animate-float"
+            class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-neon/20 dark:bg-accent-neon/15 rounded-full blur-[100px] animate-float-glow"
             style="animation-delay: -3s;"
         >
         </div>
         <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-160 h-160 bg-primary-300/10 dark:bg-primary-800/5 rounded-full blur-3xl"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-primary-300/20 dark:bg-primary-900/10 rounded-full blur-[120px]"
         >
         </div>
         <!-- Grid pattern -->
         <div
-            class="absolute inset-0 bg-[linear-gradient(rgba(48,54,79,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(48,54,79,0.04)_1px,transparent_1px)] bg-size-[60px_60px] dark:bg-[linear-gradient(rgba(172,186,196,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(172,186,196,0.05)_1px,transparent_1px)]"
+            class="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.05)_1px,transparent_1px)]"
         >
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <!-- Greeting badge
-        <div
-            class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 text-primary-700 dark:text-primary-300 text-sm font-medium mb-8"
-        >
-            <span
-                class="inline-block w-2 h-2 rounded-full bg-primary-500 animate-pulse"
-            ></span>
-            Available for projects
-        </div> -->
-
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
         <!-- Name -->
         <h1
             class="reveal text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4"
         >
-            <span class="text-slate-900 dark:text-white">Hi, I'm </span>
+            <span class="text-slate-800 dark:text-slate-100">Hi, I'm </span>
             <span
-                class="bg-linear-to-r from-primary-800 via-primary-600 to-primary-400 bg-clip-text text-transparent"
+                class="bg-linear-to-r from-primary-600 via-primary-500 to-accent-neon bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.4)] dark:drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
                 >Irfan</span
             >
         </h1>
@@ -62,7 +52,7 @@ import avatarImg from "../../public/images/avatar.png";
 
         <!-- Tagline -->
         <p
-            class="reveal max-w-2xl mx-auto text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed"
+            class="reveal max-w-2xl mx-auto text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium"
             style="animation-delay: 0.2s;"
         >
             I build modern web and mobile applications with clean code and
@@ -76,16 +66,19 @@ import avatarImg from "../../public/images/avatar.png";
         >
             <a
                 href="#projects"
-                class="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-primary-600 to-accent-neon text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:-translate-y-1 relative overflow-hidden group border border-white/20"
             >
-                View My Work
-                <Icon name="chevron-down" class="w-4 h-4 -rotate-90" />
+                <div class="absolute inset-0 w-full h-full bg-white/20 blur-md -skew-x-[30deg] -translate-x-full group-hover:animate-glare"></div>
+                <span class="relative z-10 flex items-center gap-2">
+                    View My Work
+                    <Icon name="chevron-down" class="w-4 h-4 -rotate-90" />
+                </span>
             </a>
             <a
                 href="mailto:ucilmenangis@gmail.com"
-                class="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-800 dark:bg-primary-50 text-white dark:text-primary-900 font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border-none"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md text-slate-800 dark:text-white font-semibold rounded-2xl hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 hover:-translate-y-1 border border-slate-200 dark:border-white/10"
             >
-                <Icon name="envelope" class="w-5 h-5" />
+                <Icon name="envelope" class="w-5 h-5 text-primary-500 dark:text-accent-neon" />
                 Get In Touch
             </a>
         </div>
@@ -95,17 +88,18 @@ import avatarImg from "../../public/images/avatar.png";
             class="reveal mt-16 flex justify-center"
             style="animation-delay: 0.4s;"
         >
-            <div class="relative">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-primary-500/30 blur-2xl rounded-full group-hover:bg-accent-neon/40 transition-colors duration-500"></div>
                 <div
-                    class="w-28 h-28 rounded-full bg-linear-to-br from-primary-400 to-primary-600 p-[3px] animate-pulse-ring"
+                    class="w-32 h-32 rounded-full bg-linear-to-br from-primary-400 via-primary-600 to-accent-neon p-1 animate-pulse-ring relative z-10"
                 >
                     <div
-                        class="w-full h-full rounded-full bg-surface-secondary dark:bg-dark-secondary flex items-center justify-center overflow-hidden"
+                        class="w-full h-full rounded-full bg-white dark:bg-dark-secondary flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-900 shadow-inner"
                     >
                         <Image
                             src={avatarImg}
                             alt="Irfan Avatar"
-                            class="w-full h-full object-cover"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             loading="eager"
                         />
                     </div>
@@ -115,12 +109,12 @@ import avatarImg from "../../public/images/avatar.png";
 
         <!-- Scroll indicator -->
         <div
-            class="reveal mt-12 animate-bounce-slow"
+            class="reveal mt-16 animate-bounce-slow"
             style="animation-delay: 0.5s;"
         >
             <Icon
                 name="chevron-down"
-                class="w-6 h-6 mx-auto text-slate-400 dark:text-slate-600"
+                class="w-6 h-6 mx-auto text-primary-400 dark:text-primary-600"
             />
         </div>
     </div>

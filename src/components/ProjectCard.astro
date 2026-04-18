@@ -14,12 +14,15 @@ const { project, index, className = "" } = Astro.props;
 ---
 
 <div
-  class={`reveal group flex flex-col rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/20 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-primary-300 dark:hover:border-primary-500/50 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1 ${className}`}
+  class={`reveal group flex flex-col rounded-2xl overflow-hidden bg-white/30 dark:bg-dark-card/60 backdrop-blur-xl border border-white/40 dark:border-white/10 hover:border-primary-400 dark:hover:border-accent-neon hover:shadow-[0_15px_35px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_15px_35px_rgba(139,92,246,0.2)] transition-all duration-500 hover:-translate-y-2 relative ${className}`}
   style={`animation-delay: ${index * 0.1}s;`}
 >
+  <!-- Card Internal Glow Overlay -->
+  <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 mix-blend-overlay"></div>
+
   <!-- Project image -->
   <div
-    class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800"
+    class={`relative overflow-hidden bg-slate-100 dark:bg-slate-900 ${index === 0 ? 'aspect-video lg:aspect-[16/9]' : 'aspect-video'}`}
   >
     {
       project.image ? (
@@ -28,28 +31,28 @@ const { project, index, className = "" } = Astro.props;
           alt={project.title}
           width={800}
           height={450}
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
       ) : (
-        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/20">
-          <Icon name="code" class="w-12 h-12 text-primary-400" />
+        <div class="w-full h-full flex items-center justify-center bg-linear-to-br from-primary-100 to-primary-300 dark:from-primary-900/40 dark:to-accent-neon/30">
+          <Icon name="code" class="w-12 h-12 text-primary-500 dark:text-accent-neon animate-pulse" />
         </div>
       )
     }
 
     <!-- Hover overlay with links -->
     <div
-      class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4"
+      class="absolute inset-0 bg-slate-900/40 dark:bg-slate-900/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20"
     >
-      <div class="flex gap-3">
+      <div class="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
         {
           project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-white/90 text-slate-900 text-sm font-medium rounded-lg hover:bg-white transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/90 text-slate-900 text-sm font-semibold rounded-xl hover:bg-white hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all"
             >
               <Icon name="github" class="w-4 h-4" />
               Code
@@ -62,7 +65,7 @@ const { project, index, className = "" } = Astro.props;
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-primary-600 to-accent-neon text-white text-sm font-semibold rounded-xl hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] transition-all"
             >
               <Icon name="external-link" class="w-4 h-4" />
               Live
@@ -74,35 +77,35 @@ const { project, index, className = "" } = Astro.props;
   </div>
 
   <!-- Project info -->
-  <div class="p-5">
+  <div class="p-6 relative z-10 flex flex-col grow">
     <h3
-      class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+      class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all"
     >
       {project.title}
     </h3>
     <p
-      class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed"
+      class="text-sm text-slate-600 dark:text-slate-300 mb-6 line-clamp-3 leading-relaxed grow font-medium"
     >
       {project.description}
     </p>
 
     <!-- Tech badges -->
     <div
-      class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-700/50 mt-4"
+      class="flex flex-wrap gap-2 pt-5 border-t border-slate-200/50 dark:border-slate-700/50"
     >
       {
         project.tech.map((t) => (
-          <div class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:scale-105 transition-transform">
+          <div class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-white dark:border-white/5 shadow-sm backdrop-blur-md hover:bg-white dark:hover:bg-slate-700 hover:border-primary-300 dark:hover:border-primary-500 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)] transition-all">
             <img
               src={`https://skillicons.dev/icons?i=${t}`}
               alt={t}
               title={t}
               width="24"
               height="24"
-              class="w-6 h-6"
+              class="w-5 h-5 drop-shadow-sm"
               loading="lazy"
             />
-            <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 tracking-wide">
               {skillNames[t] || t.toUpperCase()}
             </span>
           </div>

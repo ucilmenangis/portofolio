@@ -6,18 +6,22 @@ import Icon from "./Icon.astro";
 
 <section
   id="timeline"
-  class="py-24 bg-surface-secondary dark:bg-dark-secondary"
+  class="py-24 relative"
 >
+  <!-- Background gradient for timeline section -->
+  <div class="absolute inset-0 bg-surface-secondary dark:bg-dark-secondary -z-10"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.05)_0%,transparent_70%)] -z-10"></div>
+
   <div class="max-w-3xl mx-auto px-6">
     <!-- Section header -->
-    <div class="reveal text-center mb-16">
+    <div class="reveal text-center mb-16 relative">
       <h2
-        class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3"
+        class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-4"
       >
         Experience & Education
       </h2>
-      <div class="w-12 h-1 bg-primary-600 rounded-full mx-auto mb-4"></div>
-      <p class="text-slate-500 dark:text-slate-400">My journey so far</p>
+      <div class="w-16 h-1.5 bg-linear-to-r from-primary-600 to-accent-neon rounded-full mx-auto mb-4 drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]"></div>
+      <p class="text-slate-600 dark:text-slate-400 font-medium">My journey so far</p>
     </div>
 
     <!-- Timeline Stack -->
@@ -29,58 +33,60 @@ import Icon from "./Icon.astro";
 
           return (
             <div
-              class="w-full flex flex-col items-center reveal"
+              class="w-full flex flex-col items-center reveal group"
               style={`animation-delay: ${index * 0.1}s;`}
             >
               {/* Content card */}
-              <div class="w-full p-6 sm:p-8 rounded-2xl bg-white/40 dark:bg-slate-800/20 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 shadow-sm hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-500/50 transition-all duration-300">
+              <div class="w-full p-6 sm:p-8 rounded-2xl bg-white/30 dark:bg-dark-card/60 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_35px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_15px_35px_rgba(139,92,246,0.2)] hover:border-primary-400 dark:hover:border-accent-neon transition-all duration-500 relative overflow-hidden">
+                <div class="absolute inset-0 bg-linear-to-br from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay"></div>
+                
                 {/* Header */}
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 relative z-10">
                   <div class="flex items-center gap-3">
                     <span
-                      class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${isWork ? "bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-800/50" : "bg-slate-100 dark:bg-slate-800/40 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"}`}
+                      class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black uppercase tracking-widest ${isWork ? "bg-white/60 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-500/30 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : "bg-white/60 dark:bg-slate-800/40 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-white/10 shadow-sm"}`}
                     >
                       {isWork ? "Work" : "Education"}
                     </span>
-                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400 tracking-wide">
                       {item.period}
                     </span>
                   </div>
                 </div>
 
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1.5">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1.5 group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all relative z-10">
                   {item.title}
                 </h3>
-                <p class="text-base font-semibold text-primary-600 dark:text-primary-400 mb-2">
+                <p class="text-base font-bold text-primary-600 dark:text-primary-400 mb-2 relative z-10 drop-shadow-sm">
                   {item.organization}
                 </p>
 
                 {item.location && (
-                  <p class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
-                    <Icon name="map-pin" class="w-4 h-4" />
+                  <p class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4 font-medium relative z-10">
+                    <Icon name="map-pin" class="w-4 h-4 text-primary-400" />
                     {item.location}
                   </p>
                 )}
 
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-5">
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-5 relative z-10 font-medium">
                   {item.description}
                 </p>
 
                 {/* Tech Stack Icons */}
                 {item.tech && item.tech.length > 0 && (
-                  <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+                  <div class="flex flex-wrap gap-2 pt-5 border-t border-slate-200/50 dark:border-white/10 relative z-10">
                     {item.tech.map((t) => (
-                      <div class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 hover:scale-105 transition-transform">
+                      <div class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-white dark:border-white/5 shadow-sm backdrop-blur-md hover:bg-white dark:hover:bg-slate-700 hover:border-primary-300 dark:hover:border-primary-500 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)] transition-all">
                         <img
                           src={`https://skillicons.dev/icons?i=${t}`}
                           alt={t}
                           title={t}
                           width="24"
                           height="24"
-                          class="w-6 h-6"
+                          class="w-5 h-5 drop-shadow-sm"
                           loading="lazy"
                         />
-                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 tracking-wide">
                           {skillNames[t] || t.toUpperCase()}
                         </span>
                       </div>
@@ -91,21 +97,21 @@ import Icon from "./Icon.astro";
 
               {/* Marker / Connector line directly between cards */}
               {!isLast && (
-                <div class="flex flex-col items-center py-2">
-                  <div class="w-0.5 h-6 bg-slate-200 dark:bg-slate-700" />
+                <div class="flex flex-col items-center py-2 relative z-0">
+                  <div class="w-1 h-6 bg-linear-to-b from-primary-400/20 to-primary-600/50 dark:from-white/10 dark:to-accent-neon/50 rounded-full" />
 
                   {/* Next entry's icon */}
                   {timelineItems[index + 1].type === "work" ? (
-                    <div class="w-12 h-12 rounded-full border-4 border-white dark:border-dark-secondary bg-primary-100 dark:bg-primary-900 flex items-center justify-center z-10 shadow-sm text-primary-600 dark:text-primary-400 my-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-primary-400 dark:border-accent-neon bg-white/80 dark:bg-dark-secondary/80 backdrop-blur-md flex items-center justify-center z-10 shadow-[0_0_15px_rgba(59,130,246,0.4)] text-primary-600 dark:text-accent-neon my-1 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.6)]">
                       <Icon name="briefcase" class="w-5 h-5" />
                     </div>
                   ) : (
-                    <div class="w-12 h-12 rounded-full border-4 border-white dark:border-dark-secondary bg-slate-100 dark:bg-slate-800 flex items-center justify-center z-10 shadow-sm text-slate-600 dark:text-slate-400 my-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-slate-300 dark:border-white/20 bg-white/80 dark:bg-dark-secondary/80 backdrop-blur-md flex items-center justify-center z-10 shadow-md text-slate-600 dark:text-slate-300 my-1 transition-all duration-500 group-hover:scale-110">
                       <Icon name="graduation-cap" class="w-5 h-5" />
                     </div>
                   )}
 
-                  <div class="w-0.5 h-6 bg-slate-200 dark:bg-slate-700" />
+                  <div class="w-1 h-8 bg-linear-to-b from-primary-600/50 to-transparent dark:from-accent-neon/50 dark:to-transparent rounded-full" />
                 </div>
               )}
             </div>

@@ -3,114 +3,101 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    /* Primary Accent Palette — derived from #30364F · #ACBAC4 · #E1D9BC · #F0F0DB */
-    --color-primary-50: #F0F0DB;
-    --color-primary-100: #E8E7CF;
-    --color-primary-200: #E1D9BC;
-    --color-primary-300: #CFCDB0;
-    --color-primary-400: #ACBAC4;
-    --color-primary-500: #8A95A4;
-    --color-primary-600: #6B7590;
-    --color-primary-700: #4D5670;
-    --color-primary-800: #30364F;
-    --color-primary-900: #232840;
+    /* Primary Accent Palette — Electric Blue */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
 
-    /* Surface colors (light mode – warm cream family) */
-    --color-surface: #F0F0DB;
-    --color-surface-secondary: #E1D9BC;
-    --color-surface-tertiary: #CFCDB0;
-    --color-surface-card: #F7F5EC;
+    --color-accent-neon: #8b5cf6;
 
-    /* Dark surface colors (deep navy family) */
-    --color-dark: #1a1e2e;
-    --color-dark-secondary: #232840;
-    --color-dark-tertiary: #30364F;
-    --color-dark-card: #2a3048;
+    /* Surface colors (light mode – clear ice) */
+    --color-surface: #f8fafc;
+    --color-surface-secondary: #f1f5f9;
+    --color-surface-tertiary: #e2e8f0;
+    --color-surface-card: rgba(255, 255, 255, 0.6); 
 
-    /* Font family */
+    /* Dark surface colors (deep void) */
+    --color-dark: #020617;
+    --color-dark-secondary: #0f172a;
+    --color-dark-tertiary: #1e293b;
+    --color-dark-card: rgba(15, 23, 42, 0.5);
+
+    /* Font family - let's keep Inter if it's imported, or upgrade to a more standard stack */
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
     /* Custom animations */
     --animate-float: float 8s ease-in-out infinite;
-    --animate-pulse-ring: pulse-ring 3s ease-in-out infinite;
-    --animate-bounce-slow: bounce-slow 2s ease-in-out infinite;
-    --animate-fade-up: fade-up 0.6s ease-out both;
+    --animate-float-glow: float-glow 6s ease-in-out infinite;
+    --animate-pulse-ring: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    --animate-glare: glare 3s infinite linear;
+    --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(15px, -20px) scale(1.02); }
+    66% { transform: translate(-15px, 15px) scale(0.98); }
+}
 
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-        transform: translate(30px, -30px) scale(1.05);
-    }
-
-    66% {
-        transform: translate(-20px, 20px) scale(0.95);
-    }
+@keyframes float-glow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5)); transform: translateY(0); }
+    50% { filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.7)); transform: translateY(-10px); }
 }
 
 @keyframes pulse-ring {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(48, 54, 79, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 0 20px rgba(48, 54, 79, 0);
-    }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
 }
 
-@keyframes bounce-slow {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
+@keyframes glare {
+    0% { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(200%) skewX(-15deg); }
 }
 
 @keyframes fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 /* ---- Base Styles ---- */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 100px;
 }
 
 body {
     font-family: var(--font-sans);
     overflow-x: hidden;
+    background-color: var(--color-surface);
+    color: var(--color-primary-900);
+    /* Subtle light mode mesh background */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
 }
 
-a,
-button,
-[role="button"],
-.theme-toggle-btn {
+a, button, [role="button"], .theme-toggle-btn {
     cursor: pointer;
 }
 
 /* ---- Dark Mode ---- */
 .dark body {
     background-color: var(--color-dark);
-    color: #E1D9BC;
+    color: #e2e8f0;
+    /* Deep void mesh background */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 40%),
+        radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.2) 0px, transparent 40%);
+    background-attachment: fixed;
 }
 
 /* ---- Scroll Reveal ---- */
