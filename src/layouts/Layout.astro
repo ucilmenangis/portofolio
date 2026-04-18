@@ -49,8 +49,21 @@ const {
     </script>
   </head>
   <body
-    class="bg-surface text-primary-800 dark:bg-dark dark:text-primary-200 transition-colors duration-300 antialiased"
+    class="bg-surface text-primary-800 dark:bg-dark dark:text-primary-200 transition-colors duration-300 antialiased overflow-hidden"
   >
+    <!-- Preloader -->
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[9999] bg-surface dark:bg-dark flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out"
+    >
+      <div class="relative w-20 h-20 mb-6">
+        <div class="absolute inset-0 rounded-full border-4 border-primary-200 dark:border-slate-800"></div>
+        <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-primary-600 dark:border-t-accent-neon animate-spin shadow-[0_0_15px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(139,92,246,0.5)]"></div>
+        <div class="absolute inset-0 rounded-full border-4 border-transparent border-b-primary-400 dark:border-b-primary-600 animate-[spin_2s_linear_infinite_reverse]"></div>
+      </div>
+      <span class="text-2xl font-black bg-linear-to-r from-primary-600 to-accent-neon bg-clip-text text-transparent tracking-widest uppercase animate-pulse drop-shadow-sm">Irfan</span>
+    </div>
+
     <slot />
 
     <!-- Scroll reveal observer -->
@@ -68,6 +81,20 @@ const {
       document
         .querySelectorAll(".reveal")
         .forEach((el) => observer.observe(el));
+      
+      // Preloader logic
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        if (preloader) {
+          preloader.classList.add("opacity-0");
+          // Restore scrolling functionality
+          document.body.classList.remove("overflow-hidden");
+          
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 700); // Wait for transition duration
+        }
+      });
     </script>
   </body>
 </html>
