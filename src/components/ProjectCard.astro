@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../data/projects";
+import { skillNames } from "../data/skills";
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 
@@ -10,21 +11,6 @@ interface Props {
 }
 
 const { project, index, className = "" } = Astro.props;
-
-const skillNames: Record<string, string> = {
-  php: "PHP",
-  js: "JavaScript",
-  laravel: "Laravel",
-  mysql: "MySQL",
-  css: "CSS",
-  html: "HTML",
-  nodejs: "Node.js",
-  java: "Java",
-  python: "Python",
-  kotlin: "Kotlin",
-  flutter: "Flutter",
-  bootstrap: "Bootstrap",
-};
 ---
 
 <div

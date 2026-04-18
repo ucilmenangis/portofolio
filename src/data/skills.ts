@@ -1,3 +1,18 @@
+export const skillNames: Record<string, string> = {
+    php: "PHP",
+    js: "JavaScript",
+    laravel: "Laravel",
+    mysql: "MySQL",
+    css: "CSS",
+    html: "HTML",
+    nodejs: "Node.js",
+    java: "Java",
+    python: "Python",
+    kotlin: "Kotlin",
+    flutter: "Flutter",
+    bootstrap: "Bootstrap",
+};
+
 export interface Skill {
     name: string;
     icon: string; // SkillIcon identifier
