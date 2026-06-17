@@ -7,12 +7,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { AnimatedGridPattern } from "./ui/AnimatedGridPattern";
 import { GitCommitGrid } from "./ui/GitCommitGrid";
-
-const projectAvatars = [
-  "/images/projects/tefacanning.png",
-  "/images/projects/himapala-bekisar.webp",
-  "/images/projects/deceasedcraft.png",
-];
+import { projects } from "../data/projects";
 
 const techAvatars = [
   "https://skillicons.dev/icons?i=laravel",
@@ -46,11 +41,11 @@ const techAvatars = [
         <ScrollReveal client:load delay={0.3} className="grid grid-cols-2 gap-6 w-full max-w-lg">
           <div class="flex flex-col gap-2 border-l-2 border-slate-800 pl-4">
             <span class="text-4xl font-bold text-slate-100">
-              <NumberTicker client:visible value={10} />+
+              <NumberTicker client:visible value={projects.length} />
             </span>
             <span class="text-sm font-medium text-slate-500 uppercase tracking-widest">Projects</span>
             <div class="mt-2">
-              <AvatarCircles client:visible numPeople={7} avatarUrls={projectAvatars} />
+              <AvatarCircles client:visible avatarUrls={projects.map(p => p.image)} />
             </div>
           </div>
           <div class="flex flex-col gap-2 border-l-2 border-slate-800 pl-4">

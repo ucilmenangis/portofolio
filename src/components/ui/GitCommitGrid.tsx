@@ -83,51 +83,89 @@ export function GitCommitGrid() {
     }
   };
 
-  const handleMouseMove = (e: React.MouseEvent, day: DayData) => {
+  const handleMouseMove = React.useCallback((e: React.MouseEvent, day: DayData) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    // Calculate coordinates relative to the outer container
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setHoveredDay({ day, x, y });
-  };
+  }, []);
+
+  const monthsMap = React.useMemo(() => {
+    const map = new Map<number, string>();
+    weeks.forEach((week, i) => {
+      if (week.length > 0) {
+        const date = new Date(week[0].date);
+        const monthStr = date.toLocaleString('en-US', { month: 'short' });
+        if (i === 0 || new Date(weeks[i - 1][0].date).getMonth() !== date.getMonth()) {
+          // Check if previous label is too close
+          const prevKeys = Array.from(map.keys());
+          if (prevKeys.length === 0 || i - prevKeys[prevKeys.length - 1] > 2) {
+            map.set(i, monthStr);
+          }
+        }
+      }
+    });
+    return map;
+  }, [weeks]);
+
+  const memoizedGrid = React.useMemo(() => {
+    return weeks.map((week, i) => (
+      <div key={i} className="flex flex-col gap-1 md:gap-1.5">
+        {week.map((day, j) => (
+          <motion.div 
+            key={j} 
+            whileHover={{ scale: 1.2 }}
+            onMouseMove={(e) => handleMouseMove(e, day)}
+            className={`w-full aspect-square rounded-[2px] md:rounded-sm ${getColor(day.intensity)} transition-colors duration-300 cursor-pointer`}
+          />
+        ))}
+      </div>
+    ));
+  }, [weeks, handleMouseMove]);
 
   if (weeks.length === 0) {
-    return <div className="w-full h-[180px] mt-8 rounded-2xl bg-slate-900/40 border border-slate-800/50 animate-pulse"></div>;
+    return <div className="w-full h-[180px] mt-8 animate-pulse"></div>;
   }
 
   return (
-    <div ref={containerRef} className="relative w-full flex flex-col gap-4 p-6 mt-8 rounded-2xl bg-slate-900/40 border border-slate-800/50 backdrop-blur-sm">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-slate-200">GitHub Contributions</h3>
-        <span className="text-sm font-medium text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full">{total} commits this year</span>
-      </div>
+    <div ref={containerRef} className="relative w-full flex flex-col gap-4 mt-8">
+      <h3 className="text-xl font-bold text-slate-100">GitHub Activity</h3>
       
-      <div className="flex gap-1.5 overflow-x-auto pb-2 scrollbar-hide" onMouseLeave={() => setHoveredDay(null)}>
-        {weeks.map((week, i) => (
-          <div key={i} className="flex flex-col gap-1.5">
-            {week.map((day, j) => (
-              <motion.div 
-                key={j} 
-                whileHover={{ scale: 1.2 }}
-                onMouseMove={(e) => handleMouseMove(e, day)}
-                className={`w-3.5 h-3.5 rounded-sm ${getColor(day.intensity)} transition-colors duration-300 cursor-pointer`}
-              />
+      <div className="w-full flex flex-col overflow-x-auto pb-2 scrollbar-hide" onMouseLeave={() => setHoveredDay(null)}>
+        <div className="min-w-[800px] w-full flex flex-col gap-2">
+          {/* Month labels aligned perfectly to columns */}
+          <div className="grid grid-cols-[repeat(53,_1fr)] gap-1 md:gap-1.5 text-xs font-medium text-slate-500 h-4">
+            {weeks.map((_, i) => (
+              <div key={`month-${i}`} className="relative">
+                {monthsMap.has(i) && (
+                  <span className="absolute left-0">{monthsMap.get(i)}</span>
+                )}
+              </div>
             ))}
           </div>
-        ))}
+          
+          {/* Grid cells filling full width */}
+          <div className="grid grid-cols-[repeat(53,_1fr)] gap-1 md:gap-1.5 w-full">
+            {memoizedGrid}
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 text-xs text-slate-400 mt-2">
-        <span>Less</span>
-        <div className="flex gap-1">
-          <div className="w-3 h-3 rounded-sm bg-slate-800/40" />
-          <div className="w-3 h-3 rounded-sm bg-emerald-900/60" />
-          <div className="w-3 h-3 rounded-sm bg-emerald-700/60" />
-          <div className="w-3 h-3 rounded-sm bg-emerald-500/80" />
-          <div className="w-3 h-3 rounded-sm bg-emerald-400" />
+      <div className="flex items-center justify-between text-xs text-slate-500 mt-1">
+        <span>{total.toLocaleString()} contributions in the last year</span>
+        
+        <div className="flex items-center gap-2">
+          <span>Less</span>
+          <div className="flex gap-1 md:gap-1.5">
+            <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm bg-slate-800/40" />
+            <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm bg-emerald-900/60" />
+            <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm bg-emerald-700/60" />
+            <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm bg-emerald-500/80" />
+            <div className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm bg-emerald-400" />
+          </div>
+          <span>More</span>
         </div>
-        <span>More</span>
       </div>
 
       <AnimatePresence>
