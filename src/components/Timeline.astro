@@ -7,9 +7,13 @@ import { TextAnimate } from "./ui/TextAnimate";
 import { AvatarCircles } from "./ui/AvatarCircles";
 import { ScrollLine } from "./ui/ScrollLine";
 import { ScrollHighlight } from "./ui/ScrollHighlight";
+import { HexagonPattern } from "./ui/HexagonPattern";
 ---
 
 <section id="timeline" class="py-24 relative z-10 overflow-hidden">
+  <!-- Hexagon Pattern Background -->
+  <HexagonPattern size={40} className="opacity-[0.03] text-emerald-500" />
+  
   <div class="max-w-5xl mx-auto px-6 relative">
     <!-- Section Header -->
     <div class="reveal flex flex-col items-center gap-4 mb-20 text-center">

@@ -6,14 +6,25 @@ import { BlurFade } from "./ui/BlurFade";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { VelocityScroll } from "./ui/VelocityScroll";
+import { GridPattern } from "./ui/GridPattern";
 ---
 
 <div class="w-full bg-slate-950 border-y border-slate-900 py-12 mb-20 overflow-hidden">
   <VelocityScroll client:visible text="Fullstack • Laravel • React • Flutter • Tailwind • MySQL •" defaultVelocity={1} />
 </div>
 
-<section id="projects" class="py-16 relative z-10">
-  <div class="max-w-5xl mx-auto px-6">
+<section id="projects" class="py-16 relative z-10 overflow-hidden">
+  <!-- Grid Pattern Background -->
+  <GridPattern 
+    width={40}
+    height={40}
+    x={-1}
+    y={-1}
+    strokeDasharray="4 2"
+    className="opacity-[0.2] text-emerald-500/20 [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]"
+  />
+
+  <div class="max-w-5xl mx-auto px-6 relative">
     <!-- Section Header -->
     <div class="flex flex-col gap-4 mb-16 max-w-2xl">
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">

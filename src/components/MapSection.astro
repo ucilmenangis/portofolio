@@ -1,53 +1,61 @@
 ---
 import { DottedMap } from "./ui/DottedMap";
 import { ScrollReveal } from "./ui/ScrollReveal";
+import { InteractiveGridPattern } from "./ui/InteractiveGridPattern";
 ---
 
 <section id="map" class="py-24 relative z-10 bg-slate-950">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col lg:flex-row items-center gap-16">
-      
       <!-- Text content -->
       <div class="w-full lg:w-1/3 flex flex-col gap-6">
         <ScrollReveal client:visible delay={0.1}>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-mono mb-4">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            IDN // Jember, East Java
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-mono mb-4"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+            ></span>
+            Jember, East Java
           </div>
           <h2 class="text-4xl font-bold text-slate-100 tracking-tight">
-            Operating Locally,<br/>Building Globally.
+            Operating Locally,<br />Building Globally.
           </h2>
         </ScrollReveal>
-        
+
         <ScrollReveal client:visible delay={0.2}>
           <p class="text-slate-400 text-lg leading-relaxed">
-            Based in Indonesia, I collaborate with clients and teams worldwide to deliver high-quality digital products. 
-            My time zone allows for excellent overlap with major global markets.
+            Based in Indonesia, I collaborate with clients and teams worldwide
+            to deliver high-quality digital products. My time zone allows for
+            excellent overlap with major global markets.
           </p>
         </ScrollReveal>
       </div>
 
       <!-- Map Graphic -->
-      <div class="w-full lg:w-2/3 relative h-[400px] flex items-center justify-center">
+      <div
+        class="w-full lg:w-2/3 relative h-[400px] flex items-center justify-center"
+      >
         <!-- Radial gradient to fade edges -->
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#020617_70%)] z-10 pointer-events-none"></div>
-        
+        <div
+          class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#020617_70%)] z-10 pointer-events-none"
+        >
+        </div>
+
         <!-- The Map -->
         <div class="absolute inset-0 opacity-100">
-          <DottedMap 
-            client:visible 
+          <DottedMap
+            client:visible
             mapSamples={8000}
-            dotColor="#334155" 
+            dotColor="#334155"
             dotRadius={0.3}
             markerColor="#10b981"
             pulse={true}
             markers={[
-              { lat: -8.17, lng: 113.7, size: 2.5 } // Jember, Indonesia
+              { lat: -8.17, lng: 113.7, size: 2.5 }, // Jember, Indonesia
             ]}
           />
         </div>
       </div>
-
     </div>
   </div>
 </section>
