@@ -174,14 +174,32 @@ export function DottedMap<M extends Marker = Marker>({
               </g>
             ) : null}
 
+            {/* Avatar Circle Flag */}
+            <defs>
+              <clipPath id={`flag-clip-${index}`}>
+                <circle cx={x} cy={y} r={r * 1.2} />
+              </clipPath>
+            </defs>
+            <circle cx={x} cy={y} r={r * 1.4} fill="#0f172a" stroke={markerColor} strokeWidth="0.5" />
+            <image 
+              href="https://flagcdn.com/w40/id.png" 
+              x={x - r * 1.2} 
+              y={y - r * 1.2} 
+              height={r * 2.4} 
+              width={r * 2.4} 
+              clipPath={`url(#flag-clip-${index})`} 
+              preserveAspectRatio="xMidYMid slice"
+            />
+
             {/* Indonesia Label beneath marker */}
             <text
               x={x}
-              y={y + 12}
+              y={y + 8}
               textAnchor="middle"
-              className="text-[6px] font-bold fill-slate-300 uppercase tracking-widest font-mono"
+              className="font-bold fill-slate-400 uppercase tracking-widest font-mono"
+              style={{ fontSize: "2.5px" }}
             >
-              🇮🇩 INDONESIA
+              INDONESIA
             </text>
 
             {renderMarkerOverlay?.({
