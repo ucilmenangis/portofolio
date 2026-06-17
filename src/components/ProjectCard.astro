@@ -13,7 +13,7 @@ interface Props {
 const { project, index, className = "", isFeatured = false } = Astro.props;
 ---
 
-<div class={`group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-slate-900/50 border border-slate-800/50 ${className}`}>
+<div class={`group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-slate-900/50 border border-slate-800/50 hover:border-emerald-500/30 transform hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] transition-all duration-500 ease-out ${className}`}>
   <!-- Content on top -->
   <div class="p-6 md:p-8 z-10 flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
@@ -52,7 +52,7 @@ const { project, index, className = "", isFeatured = false } = Astro.props;
     <!-- Gradient overlay to blend bottom of mockup -->
     <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-slate-900/80 to-transparent z-10 pointer-events-none"></div>
     
-    <div class="w-full transform translate-y-4 group-hover:-translate-y-2 transition-transform duration-700 ease-out">
+    <div class="w-full max-w-3xl mx-auto transform translate-y-4 group-hover:-translate-y-2 transition-transform duration-700 ease-out">
       <SafariMockup url={project.live || "https://local.dev"} className="shadow-2xl">
         <img src={project.image} alt={project.title} class="w-full h-auto object-cover" loading="lazy" />
       </SafariMockup>

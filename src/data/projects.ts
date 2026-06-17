@@ -33,4 +33,20 @@ export const projects: Project[] = [
         image: "/images/projects/deceasedcraft.png",
         github: "https://github.com/ucilmenangis/DeceasedCraft-Server-5.10",
     },
+    {
+        title: "Nusantara Smart City",
+        description:
+            "A conceptual dashboard and analytics platform for urban infrastructure monitoring, featuring real-time data visualization and IOT sensor integration.",
+        tech: ["react", "tailwindcss", "supabase"],
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
+        live: "https://example.com",
+    },
+    {
+        title: "Lumina AI Chat",
+        description:
+            "A fast, modern conversational interface powered by large language models, featuring markdown support, code highlighting, and streaming responses.",
+        tech: ["react", "firebase", "tailwind"],
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
+        github: "https://github.com",
+    }
 ];

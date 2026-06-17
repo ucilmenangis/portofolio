@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { NumberTicker } from "./ui/NumberTicker";
 import { AvatarCircles } from "./ui/AvatarCircles";
-import { Globe } from "./ui/Globe";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { AnimatedGridPattern } from "./ui/AnimatedGridPattern";
@@ -72,21 +71,6 @@ const techAvatars = [
             <span class="text-sm font-medium text-slate-500 uppercase tracking-widest">Technologies</span>
             <div class="mt-2">
               <AvatarCircles client:visible numPeople={6} avatarUrls={techAvatars} />
-            </div>
-          </div>
-        </ScrollReveal>
-
-        <!-- Globe Map -->
-        <ScrollReveal client:load delay={0.5} className="flex flex-col gap-4 mt-4">
-          <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Base of Operations</h3>
-          <div class="rounded-3xl glass-panel overflow-hidden w-full h-[300px] relative border border-slate-800 bg-slate-950/50">
-            <Globe client:visible className="mt-8 scale-150" />
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/20 pointer-events-none"></div>
-            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-              <div class="px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium backdrop-blur-md">
-                LAT -8.17 | LNG 113.7
-              </div>
             </div>
           </div>
         </ScrollReveal>

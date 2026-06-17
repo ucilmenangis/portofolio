@@ -2,7 +2,6 @@
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard.astro";
 import Icon from "./Icon.astro";
-import { BentoGrid } from "./ui/BentoGrid";
 import { BlurFade } from "./ui/BlurFade";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
@@ -14,7 +13,7 @@ import { VelocityScroll } from "./ui/VelocityScroll";
 </div>
 
 <section id="projects" class="py-16 relative z-10">
-  <div class="max-w-7xl mx-auto px-6">
+  <div class="max-w-5xl mx-auto px-6">
     <!-- Section Header -->
     <div class="flex flex-col gap-4 mb-16 max-w-2xl">
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
@@ -27,16 +26,18 @@ import { VelocityScroll } from "./ui/VelocityScroll";
       </ScrollReveal>
     </div>
 
-    <!-- Magic UI Bento Grid -->
-    <BentoGrid className="mb-12">
+    <!-- Custom Responsive Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
       {
         projects.map((project, index) => {
           const isFeatured = index === 0;
-          // Magic UI Bento styling with our exact Anti-Slop layout constraints
-          const bentoClass = isFeatured ? "md:col-span-2 md:row-span-2 h-[450px]" : "md:col-span-1 md:row-span-1 h-[350px] md:h-[400px]";
+          // Featured takes full width (2 cols), others take 1 col.
+          const layoutClass = isFeatured 
+            ? "lg:col-span-2 min-h-[450px] lg:min-h-[550px]" 
+            : "col-span-1 min-h-[400px]";
           
           return (
-            <BlurFade client:visible delay={0.2 + index * 0.1} className={bentoClass}>
+            <BlurFade client:visible delay={0.2 + index * 0.1} className={layoutClass}>
               <ProjectCard
                 project={project}
                 index={index}
@@ -47,7 +48,7 @@ import { VelocityScroll } from "./ui/VelocityScroll";
           );
         })
       }
-    </BentoGrid>
+    </div>
 
     <!-- View More -->
     <ScrollReveal client:load delay={0.4} className="flex justify-center">
