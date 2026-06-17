@@ -5,28 +5,25 @@ import Icon from "./Icon.astro";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { AvatarCircles } from "./ui/AvatarCircles";
+import { ScrollLine } from "./ui/ScrollLine";
 ---
 
 <section id="timeline" class="py-24 relative z-10 overflow-hidden">
   <div class="max-w-5xl mx-auto px-6 relative">
     <!-- Section Header -->
-    <div class="flex flex-col gap-4 mb-24 max-w-2xl text-center mx-auto items-center">
+    <div class="reveal flex flex-col items-center gap-4 mb-20 text-center">
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
         <TextAnimate client:visible text="Experience" delay={0.2} />
       </h2>
-      <ScrollReveal client:load delay={0.2}>
-        <p class="text-slate-400 text-lg">
-          My professional and academic journey.
-        </p>
-      </ScrollReveal>
+      <p class="text-slate-400 text-lg max-w-2xl">
+        A timeline of my professional journey, education, and the roles that shaped my technical expertise.
+      </p>
     </div>
 
     <!-- Timeline Container -->
     <div class="relative">
-      <!-- Central Line (Dynamic glowing) -->
-      <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[2px] bg-slate-800/80 transform md:-translate-x-1/2">
-        <div class="absolute top-0 w-full h-64 bg-gradient-to-b from-transparent via-emerald-500 to-transparent animate-[pulse_4s_ease-in-out_infinite]"></div>
-      </div>
+      <!-- Central Line (Dynamic scroll following) -->
+      <ScrollLine client:visible className="left-[20px] md:left-[50%]" />
 
       <div class="flex flex-col gap-12 md:gap-24 relative">
         {
