@@ -6,6 +6,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { AvatarCircles } from "./ui/AvatarCircles";
 import { ScrollLine } from "./ui/ScrollLine";
+import { ScrollHighlight } from "./ui/ScrollHighlight";
 ---
 
 <section id="timeline" class="py-24 relative z-10 overflow-hidden">
@@ -32,7 +33,6 @@ import { ScrollLine } from "./ui/ScrollLine";
             return (
               <ScrollReveal
                 client:visible
-                delay={0.2}
                 className={`relative flex flex-col md:flex-row items-start md:items-center ${isLeft ? 'md:justify-start' : 'md:justify-end'} group w-full`}
               >
                 {/* Timeline node */}
@@ -40,27 +40,28 @@ import { ScrollLine } from "./ui/ScrollLine";
 
                 {/* Content Card */}
                 <div class={`w-full md:w-[45%] pl-14 md:pl-0 ${isLeft ? 'md:pr-14 md:text-right' : 'md:pl-14 md:text-left'}`}>
-                  <div class={`flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-emerald-300 transition-colors">
-                      {item.title}
-                    </h3>
-                    <span class="text-sm font-mono text-emerald-500/80 uppercase tracking-widest">
-                      {item.period}
-                    </span>
-                  </div>
+                  <ScrollHighlight client:visible>
+                    <div class={`flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <h3 class="text-xl font-bold text-slate-100 group-hover:text-emerald-300 transition-colors">
+                        {item.title}
+                      </h3>
+                      <span class="text-sm font-mono text-emerald-500/80 uppercase tracking-widest">
+                        {item.period}
+                      </span>
+                    </div>
 
-                  <div class={`flex flex-wrap items-center gap-2 text-slate-400 font-medium mb-4 ${isLeft ? 'md:flex-row-reverse md:justify-start' : 'md:justify-start'}`}>
-                    {item.logo && (
-                      <img src={item.logo} alt={item.organization} class="w-6 h-6 rounded-full bg-slate-800 object-cover shrink-0" />
-                    )}
-                    <span class={isLeft ? 'md:text-right' : 'md:text-left'}>{item.organization}</span>
-                    {item.location && (
-                      <>
-                        <span class="w-1 h-1 rounded-full bg-slate-700 shrink-0"></span>
-                        <span class={`text-sm ${isLeft ? 'md:text-right' : 'md:text-left'}`}>{item.location}</span>
-                      </>
-                    )}
-                  </div>
+                    <div class={`flex flex-wrap items-center gap-2 text-slate-400 font-medium mb-4 ${isLeft ? 'md:flex-row-reverse md:justify-start' : 'md:justify-start'}`}>
+                      {item.logo && (
+                        <img src={item.logo} alt={item.organization} class="w-6 h-6 rounded-full bg-slate-800 object-cover shrink-0" />
+                      )}
+                      <span class={isLeft ? 'md:text-right' : 'md:text-left'}>{item.organization}</span>
+                      {item.location && (
+                        <>
+                          <span class="w-1 h-1 rounded-full bg-slate-700 shrink-0"></span>
+                          <span class={`text-sm ${isLeft ? 'md:text-right' : 'md:text-left'}`}>{item.location}</span>
+                        </>
+                      )}
+                    </div>
 
                   <p class={`text-slate-300 leading-relaxed mb-6 font-medium ${isLeft ? 'md:ml-auto' : ''}`}>
                     {item.description}
@@ -75,6 +76,7 @@ import { ScrollLine } from "./ui/ScrollLine";
                       />
                     </div>
                   )}
+                  </ScrollHighlight>
                 </div>
               </ScrollReveal>
             );
