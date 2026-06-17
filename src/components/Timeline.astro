@@ -4,6 +4,7 @@ import { skillNames } from "../data/skills";
 import Icon from "./Icon.astro";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
+import { AvatarCircles } from "./ui/AvatarCircles";
 ---
 
 <section id="timeline" class="py-24 relative z-10 overflow-hidden">
@@ -51,12 +52,15 @@ import { TextAnimate } from "./ui/TextAnimate";
                     </span>
                   </div>
 
-                  <div class={`flex items-center gap-2 text-slate-400 font-medium mb-4 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                    <span>{item.organization}</span>
+                  <div class={`flex flex-wrap items-center gap-2 text-slate-400 font-medium mb-4 ${isLeft ? 'md:flex-row-reverse md:justify-start' : 'md:justify-start'}`}>
+                    {item.logo && (
+                      <img src={item.logo} alt={item.organization} class="w-6 h-6 rounded-full bg-slate-800 object-cover shrink-0" />
+                    )}
+                    <span class={isLeft ? 'md:text-right' : 'md:text-left'}>{item.organization}</span>
                     {item.location && (
                       <>
-                        <span class="w-1 h-1 rounded-full bg-slate-700"></span>
-                        <span>{item.location}</span>
+                        <span class="w-1 h-1 rounded-full bg-slate-700 shrink-0"></span>
+                        <span class={`text-sm ${isLeft ? 'md:text-right' : 'md:text-left'}`}>{item.location}</span>
                       </>
                     )}
                   </div>
@@ -66,12 +70,12 @@ import { TextAnimate } from "./ui/TextAnimate";
                   </p>
 
                   {item.tech && item.tech.length > 0 && (
-                    <div class={`flex flex-wrap gap-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                      {item.tech.map((t) => (
-                        <span class="px-2.5 py-1 text-xs font-mono font-medium rounded-md bg-slate-900 border border-slate-800 text-slate-400 uppercase tracking-wide hover:bg-slate-800 hover:text-emerald-400 transition-colors cursor-default">
-                          {skillNames[t] || t.toUpperCase()}
-                        </span>
-                      ))}
+                    <div class={`flex mt-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <AvatarCircles 
+                        client:visible 
+                        className={isLeft ? 'flex-row-reverse -space-x-reverse space-x-[-16px] md:-space-x-4 md:flex-row' : ''}
+                        avatarUrls={item.tech.map(t => `https://skillicons.dev/icons?i=${t === 'tailwindcss' ? 'tailwind' : t === 'js' ? 'javascript' : t === 'bootstrap' ? 'bootstrap' : t}`)} 
+                      />
                     </div>
                   )}
                 </div>

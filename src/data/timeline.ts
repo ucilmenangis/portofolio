@@ -7,6 +7,7 @@ export interface TimelineEntry {
     description: string;
     tags?: string[];
     tech?: string[];
+    logo?: string;
 }
 
 export const timeline: TimelineEntry[] = [
@@ -19,6 +20,7 @@ export const timeline: TimelineEntry[] = [
         description: "Freelance full stack development work.",
         tags: ["Freelance", "Remote"],
         tech: ["laravel", "php", "mysql", "bootstrap"],
+        logo: "https://ui-avatars.com/api/?name=Pustaka+Obor&background=10b981&color=fff&rounded=true&bold=true"
     },
     {
         type: "education",
@@ -28,6 +30,7 @@ export const timeline: TimelineEntry[] = [
         location: "Jember, East Java, Indonesia",
         description: "Currently pursuing studies in technology and software development.",
         tags: ["Current"],
+        logo: "https://ui-avatars.com/api/?name=Politeknik+Jember&background=10b981&color=fff&rounded=true&bold=true"
     },
     {
         type: "work",
@@ -39,6 +42,7 @@ export const timeline: TimelineEntry[] = [
             "Internship developing a YouTube-like application for the company. Worked on web services and mobile application development.",
         tags: ["Internship", "6 months"],
         tech: ["php", "kotlin", "html", "css"],
+        logo: "https://ui-avatars.com/api/?name=Primaland&background=10b981&color=fff&rounded=true&bold=true"
     },
     {
         type: "education",
@@ -50,5 +54,6 @@ export const timeline: TimelineEntry[] = [
             "Graduated with Rank 7. Completed a 5-month internship program. Focused on Mobile Application Development and Web Services.",
         tags: ["Graduated", "Rank 7"],
         tech: ["java", "python", "kotlin", "flutter", "html", "css"],
+        logo: "https://ui-avatars.com/api/?name=SMKN+Bondowoso&background=10b981&color=fff&rounded=true&bold=true"
     },
 ];
