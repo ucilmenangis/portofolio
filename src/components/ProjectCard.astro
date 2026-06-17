@@ -54,7 +54,12 @@ const { project, index, className = "", isFeatured = false } = Astro.props;
     
     <div class="w-full max-w-3xl mx-auto transform translate-y-4 group-hover:-translate-y-2 transition-transform duration-700 ease-out">
       <SafariMockup url={project.live || "https://local.dev"} className="shadow-2xl">
-        <img src={project.image} alt={project.title} class="w-full h-auto object-cover" loading="lazy" />
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          class="w-full h-auto max-h-[300px] object-cover object-top" 
+          loading="lazy" 
+        />
       </SafariMockup>
     </div>
   </div>
