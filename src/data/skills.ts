@@ -1,64 +1,52 @@
 export const skillNames: Record<string, string> = {
-    php: "PHP",
-    js: "JavaScript",
-    laravel: "Laravel",
-    mysql: "MySQL",
-    css: "CSS",
-    html: "HTML",
-    nodejs: "Node.js",
-    java: "Java",
-    python: "Python",
-    kotlin: "Kotlin",
-    flutter: "Flutter",
-    bootstrap: "Bootstrap",
+  html: "HTML5",
+  css: "CSS3",
+  php: "PHP",
+  dart: "Dart",
+  react: "React",
+  tailwind: "Tailwind CSS",
+  laravel: "Laravel",
+  flutter: "Flutter",
+  mysql: "MySQL",
+  postgres: "PostgreSQL",
+  supabase: "Supabase",
 };
 
 export interface Skill {
-    name: string;
-    icon: string; // SkillIcon identifier
+  name: string;
+  icon: string;
 }
 
 export interface SkillCategory {
-    title: string;
-    skills: Skill[];
+  title: string;
+  skills: Skill[];
 }
 
 export const skillCategories: SkillCategory[] = [
-    {
-        title: 'Languages',
-        skills: [
-            { name: 'PHP', icon: 'php' },
-            { name: 'JavaScript', icon: 'js' },
-            { name: 'Java', icon: 'java' },
-            { name: 'Kotlin', icon: 'kotlin' },
-            { name: 'Python', icon: 'python' },
-            { name: 'Dart', icon: 'dart' },
-            { name: 'C++', icon: 'cpp' },
-            { name: 'Swift', icon: 'swift' },
-            { name: 'HTML', icon: 'html' },
-            { name: 'CSS', icon: 'css' },
-        ],
-    },
-    {
-        title: 'Frameworks',
-        skills: [
-            { name: 'Laravel', icon: 'laravel' },
-            { name: 'React', icon: 'react' },
-            { name: 'Flutter', icon: 'flutter' },
-            { name: 'Tailwind CSS', icon: 'tailwind' },
-            { name: 'Bootstrap', icon: 'bootstrap' },
-        ],
-    },
-    {
-        title: 'Tools',
-        skills: [
-            { name: 'MySQL', icon: 'mysql' },
-            { name: 'Git', icon: 'git' },
-            { name: 'Vite', icon: 'vite' },
-            { name: 'NPM', icon: 'npm' },
-            { name: 'Android Studio', icon: 'androidstudio' },
-            { name: 'VS Code', icon: 'vscode' },
-            { name: 'Figma', icon: 'figma' },
-        ],
-    },
+  {
+    title: 'Core Stack',
+    skills: [
+      { name: 'HTML', icon: 'html' },
+      { name: 'CSS', icon: 'css' },
+      { name: 'React', icon: 'react' },
+      { name: 'Tailwind CSS', icon: 'tailwind' },
+    ],
+  },
+  {
+    title: 'Backend & Databases',
+    skills: [
+      { name: 'PHP', icon: 'php' },
+      { name: 'Laravel', icon: 'laravel' },
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'PostgreSQL', icon: 'postgres' },
+      { name: 'Supabase', icon: 'supabase' },
+    ],
+  },
+  {
+    title: 'Mobile Development',
+    skills: [
+      { name: 'Dart', icon: 'dart' },
+      { name: 'Flutter', icon: 'flutter' },
+    ],
+  },
 ];

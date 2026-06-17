@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import { CoolMode } from "./ui/CoolMode";
 ---
 
 <section id="contact" class="py-32 relative z-10 border-t border-slate-900">
@@ -15,13 +16,15 @@ import Icon from "./Icon.astro";
       </p>
 
       <div class="mt-4">
-        <a
-          href="mailto:ucilmenangis@gmail.com"
-          class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg hover:scale-105 transition-transform"
-        >
-          <Icon name="mail" class="w-5 h-5" />
-          Send me an email
-        </a>
+        <CoolMode client:load>
+          <a
+            href="mailto:ucilmenangis@gmail.com"
+            class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg hover:scale-105 transition-transform"
+          >
+            <Icon name="mail" class="w-5 h-5" />
+            Send me an email
+          </a>
+        </CoolMode>
       </div>
 
       <!-- Clean Social Links -->

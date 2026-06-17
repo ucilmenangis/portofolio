@@ -2,51 +2,64 @@
 import { projects } from "../data/projects";
 import ProjectCard from "./ProjectCard.astro";
 import Icon from "./Icon.astro";
+import { BentoGrid } from "./ui/BentoGrid";
+import { BlurFade } from "./ui/BlurFade";
+import { ScrollReveal } from "./ui/ScrollReveal";
+import { TextAnimate } from "./ui/TextAnimate";
+import { VelocityScroll } from "./ui/VelocityScroll";
 ---
 
-<section id="projects" class="py-32 relative z-10">
+<div class="w-full bg-slate-950 border-y border-slate-900 py-12 mb-20 overflow-hidden">
+  <VelocityScroll client:visible text="Fullstack • Laravel • React • Flutter • Tailwind • MySQL •" defaultVelocity={1} />
+</div>
+
+<section id="projects" class="py-16 relative z-10">
   <div class="max-w-7xl mx-auto px-6">
-    <!-- Section Header (Stacked, no split, no eyebrow) -->
-    <div class="reveal flex flex-col gap-4 mb-16 max-w-2xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight">
-        Selected Work
+    <!-- Section Header -->
+    <div class="flex flex-col gap-4 mb-16 max-w-2xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
+        <TextAnimate client:visible text="Selected Work" delay={0.2} />
       </h2>
-      <p class="text-slate-400 text-lg">
-        A collection of recent projects spanning web applications, digital systems, and custom server infrastructure.
-      </p>
+      <ScrollReveal client:load delay={0.2}>
+        <p class="text-slate-400 text-lg">
+          A collection of recent projects spanning web applications, digital systems, and custom server infrastructure.
+        </p>
+      </ScrollReveal>
     </div>
 
-    <!-- Bento Grid (3 items -> 1+2 split) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Magic UI Bento Grid -->
+    <BentoGrid className="mb-12">
       {
         projects.map((project, index) => {
-          // 1+2 Split: First item spans full width
           const isFeatured = index === 0;
-          const bentoClass = isFeatured ? "md:col-span-2 h-[400px] md:h-[500px]" : "md:col-span-1 h-[350px] md:h-[400px]";
+          // Magic UI Bento styling with our exact Anti-Slop layout constraints
+          const bentoClass = isFeatured ? "md:col-span-2 md:row-span-2 h-[450px]" : "md:col-span-1 md:row-span-1 h-[350px] md:h-[400px]";
           
           return (
-            <ProjectCard
-              project={project}
-              index={index}
-              className={bentoClass}
-              isFeatured={isFeatured}
-            />
+            <BlurFade client:visible delay={0.2 + index * 0.1} className={bentoClass}>
+              <ProjectCard
+                project={project}
+                index={index}
+                className="w-full h-full"
+                isFeatured={isFeatured}
+              />
+            </BlurFade>
           );
         })
       }
-    </div>
+    </BentoGrid>
 
-    <!-- View More / GitHub Link -->
-    <div class="reveal mt-12 flex justify-center">
+    <!-- View More -->
+    <ScrollReveal client:load delay={0.4} className="flex justify-center">
       <a
         href="https://github.com/ucilmenangis"
         target="_blank"
         rel="noopener noreferrer"
-        class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2"
+        class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-slate-800 transition-colors"
       >
         <Icon name="github" class="w-5 h-5" />
         Explore more repositories
       </a>
-    </div>
+    </ScrollReveal>
   </div>
 </section>

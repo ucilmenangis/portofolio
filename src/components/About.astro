@@ -1,24 +1,40 @@
 ---
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import { NumberTicker } from "./ui/NumberTicker";
+import { AvatarCircles } from "./ui/AvatarCircles";
+import { Globe } from "./ui/Globe";
+import { ScrollReveal } from "./ui/ScrollReveal";
+import { TextAnimate } from "./ui/TextAnimate";
+import { AnimatedGridPattern } from "./ui/AnimatedGridPattern";
+
+const techAvatars = [
+  "https://skillicons.dev/icons?i=laravel",
+  "https://skillicons.dev/icons?i=flutter",
+  "https://skillicons.dev/icons?i=react",
+  "https://skillicons.dev/icons?i=tailwind",
+];
 ---
 
 <section id="about" class="py-24 relative z-10">
   <div class="max-w-7xl mx-auto px-6">
+    <AnimatedGridPattern client:visible className="opacity-40" />
     <!-- Section Header (Stacked) -->
-    <div class="reveal flex flex-col gap-4 mb-16 max-w-2xl">
-      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight">
-        Background
+    <div class="flex flex-col gap-4 mb-16 max-w-2xl relative z-10">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
+        <TextAnimate client:visible text="Background" delay={0.2} />
       </h2>
-      <p class="text-slate-400 text-lg">
-        Bridging the gap between engineering and design.
-      </p>
+      <ScrollReveal client:load delay={0.2}>
+        <p class="text-slate-400 text-lg">
+          Bridging the gap between engineering and design.
+        </p>
+      </ScrollReveal>
     </div>
 
     <!-- Content Grid -->
-    <div class="reveal grid md:grid-cols-2 gap-16 items-start">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
       <!-- Left: Bio -->
-      <div class="flex flex-col gap-6">
+      <ScrollReveal client:load delay={0.3} className="flex flex-col gap-6">
         <p class="text-lg text-slate-300 leading-relaxed font-medium">
           I am a fullstack developer who loves turning ideas into real, functional products. Currently studying at <span class="text-emerald-400 font-semibold">Politeknik Negeri Jember</span> while freelancing as an independent developer.
         </p>
@@ -37,35 +53,43 @@ import Icon from "./Icon.astro";
             Open to work
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
-      <!-- Right: Stats & GitHub -->
+      <!-- Right: Stats & Map -->
       <div class="flex flex-col gap-8">
         <!-- Minimal Stats Grid -->
-        <div class="grid grid-cols-2 gap-6">
+        <ScrollReveal client:load delay={0.4} className="grid grid-cols-2 gap-6">
           <div class="flex flex-col gap-2 border-l-2 border-slate-800 pl-4">
-            <span class="text-4xl font-bold text-slate-100">3+</span>
+            <span class="text-4xl font-bold text-slate-100">
+              <NumberTicker client:visible value={3} />+
+            </span>
             <span class="text-sm font-medium text-slate-500 uppercase tracking-widest">Projects</span>
           </div>
           <div class="flex flex-col gap-2 border-l-2 border-slate-800 pl-4">
-            <span class="text-4xl font-bold text-slate-100">10+</span>
+            <span class="text-4xl font-bold text-slate-100">
+              <NumberTicker client:visible value={10} delay={0.2} />+
+            </span>
             <span class="text-sm font-medium text-slate-500 uppercase tracking-widest">Technologies</span>
+            <div class="mt-2">
+              <AvatarCircles client:visible numPeople={6} avatarUrls={techAvatars} />
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <!-- GitHub Contributions -->
-        <div class="hidden sm:flex flex-col gap-4 mt-4">
-          <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Open Source Activity</h3>
-          <div class="rounded-2xl glass-panel p-4 overflow-x-auto w-full">
-            <Image
-              src="https://ghchart.rshah.org/34d399/ucilmenangis"
-              alt="GitHub Contribution Graph"
-              inferSize={true}
-              class="w-full min-w-[600px] opacity-80 hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
+        <!-- Globe Map -->
+        <ScrollReveal client:load delay={0.5} className="flex flex-col gap-4 mt-4">
+          <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Base of Operations</h3>
+          <div class="rounded-3xl glass-panel overflow-hidden w-full h-[300px] relative border border-slate-800 bg-slate-950/50">
+            <Globe client:visible className="mt-8 scale-150" />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/20 pointer-events-none"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+              <div class="px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium backdrop-blur-md">
+                LAT -8.17 | LNG 113.7
+              </div>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   </div>

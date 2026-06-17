@@ -1,6 +1,7 @@
 ---
 import type { Project } from "../data/projects";
 import Icon from "./Icon.astro";
+import { SafariMockup } from "./ui/SafariMockup";
 
 interface Props {
   project: Project;
@@ -10,90 +11,51 @@ interface Props {
 }
 
 const { project, index, className = "", isFeatured = false } = Astro.props;
-
-// Anti-Slop Background Diversity:
-// Instead of all cards being identical, we vary the background treatment based on index.
-const bgVariations = [
-  // 0: Featured (Image covers full background with strong gradient)
-  "bg-slate-900 group-hover:bg-slate-800",
-  // 1: Secondary (Emerald-tinted glass)
-  "bg-emerald-950/20 border border-emerald-500/10",
-  // 2: Tertiary (Deep slate glass)
-  "bg-slate-900/40 border border-slate-700/50"
-];
-
-const bgClass = bgVariations[index % bgVariations.length];
 ---
 
-<article
-  class={`reveal relative group rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-end p-8 ${className} ${bgClass}`}
-  style={`animation-delay: ${index * 0.15}s;`}
->
-  <!-- Background Image & Gradients -->
-  {isFeatured ? (
-    <>
-      <img
-        src={project.image}
-        alt={project.title}
-        class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out"
-        loading="lazy"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
-    </>
-  ) : (
-    <>
-      <div class="absolute inset-0 overflow-hidden rounded-3xl">
-        <img
-          src={project.image}
-          alt={project.title}
-          class="w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700 ease-out"
-          loading="lazy"
-        />
-      </div>
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"></div>
-    </>
-  )}
-
-  <!-- Content -->
-  <div class="relative z-10 flex flex-col gap-4 max-w-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+<div class={`group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-slate-900/50 border border-slate-800/50 ${className}`}>
+  <!-- Content on top -->
+  <div class="p-6 md:p-8 z-10 flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
       {project.tech.map((tech) => (
-        <span class="px-3 py-1 text-xs font-mono font-medium rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-300 uppercase tracking-wide backdrop-blur-sm">
+        <span class="px-3 py-1 text-xs font-mono font-medium rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-300 uppercase tracking-wide">
           {tech}
         </span>
       ))}
     </div>
-
-    <h3 class={`font-bold text-slate-100 tracking-tight ${isFeatured ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
+    
+    <h3 class="font-bold text-slate-100 tracking-tight text-2xl md:text-3xl group-hover:text-emerald-400 transition-colors">
       {project.title}
     </h3>
-
-    <p class="text-slate-400 line-clamp-2 md:line-clamp-3 text-sm md:text-base">
+    
+    <p class="text-slate-400 text-sm md:text-base max-w-lg">
       {project.description}
     </p>
 
     <!-- Links -->
-    <div class="flex items-center gap-4 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+    <div class="flex items-center gap-4 mt-2">
       {project.live && (
-        <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
-        >
+        <a href={project.live} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
           Live Demo <Icon name="external-link" class="w-4 h-4" />
         </a>
       )}
       {project.github && (
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"
-        >
+        <a href={project.github} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">
           Source Code <Icon name="github" class="w-4 h-4" />
         </a>
       )}
     </div>
   </div>
-</article>
+
+  <!-- Visual Mockup at the bottom -->
+  <div class="relative w-full flex-1 flex items-end justify-center px-6 md:px-12 pt-6 overflow-hidden">
+    <!-- Gradient overlay to blend bottom of mockup -->
+    <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-slate-900/80 to-transparent z-10 pointer-events-none"></div>
+    
+    <div class="w-full transform translate-y-4 group-hover:-translate-y-2 transition-transform duration-700 ease-out">
+      <SafariMockup url={project.live || "https://local.dev"} className="shadow-2xl">
+        <img src={project.image} alt={project.title} class="w-full h-auto object-cover" loading="lazy" />
+      </SafariMockup>
+    </div>
+  </div>
+</div>

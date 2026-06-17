@@ -1,54 +1,62 @@
 ---
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import { MagneticWrapper } from "./ui/MagneticWrapper";
+import { ScrollReveal } from "./ui/ScrollReveal";
+import { Terminal } from "./ui/Terminal";
+import { TextAnimate } from "./ui/TextAnimate";
+import { TextHighlight } from "./ui/TextHighlight";
+import { Particles } from "./ui/Particles";
 ---
 
 <section
   id="hero"
   class="relative min-h-[100dvh] flex items-center pt-24 pb-12 overflow-hidden"
 >
+  <!-- Background Particles -->
+  <Particles client:load className="z-0" quantity={80} staticity={40} />
+
   <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
     
     <!-- Left Column: Copy & CTA -->
     <div class="flex flex-col items-start gap-6 max-w-xl">
       <!-- 1. Eyebrow -->
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-emerald-400">
-        Developer & Designer
-      </span>
+      <ScrollReveal client:load delay={0.1} direction="up">
+        <span class="font-mono text-xs uppercase tracking-[0.2em] text-emerald-400">
+          Developer & Designer
+        </span>
+      </ScrollReveal>
 
-      <!-- 2. Headline -->
-      <h1 class="reveal text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-100 leading-[1.1]">
-        Building digital <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">experiences</span>
+      <!-- 2. Headline with TextAnimate & Highlight -->
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-100 leading-[1.1]">
+        Building digital
+        <br />
+        <TextHighlight client:load delay={0.8} className="text-emerald-400">experiences</TextHighlight>
       </h1>
 
-      <!-- 3. Subtext (19 words) -->
-      <p class="reveal text-lg md:text-xl text-slate-400 leading-relaxed max-w-[45ch] font-medium" style="animation-delay: 0.1s;">
-        I craft modern web and mobile applications with clean architecture and thoughtful, premium design. Turning ideas into real products.
-      </p>
+      <!-- 3. Subtext -->
+      <ScrollReveal client:load delay={0.5} direction="up">
+        <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-[45ch] font-medium">
+          I craft modern web and mobile applications with clean architecture and thoughtful, premium design. Turning ideas into real products.
+        </p>
+      </ScrollReveal>
 
       <!-- 4. CTAs -->
-      <div class="reveal flex flex-wrap gap-4 mt-4" style="animation-delay: 0.2s;">
-        <a href="#projects" class="btn-primary px-8 py-4 rounded-xl flex items-center gap-2">
-          View Selected Work
-          <Icon name="arrow-right" class="w-4 h-4" />
-        </a>
-      </div>
+      <ScrollReveal client:load delay={0.6} direction="up">
+        <div class="flex flex-wrap gap-4 mt-4">
+          <MagneticWrapper client:load intensity={0.4}>
+            <a href="#projects" class="btn-primary px-8 py-4 rounded-xl flex items-center gap-2">
+              View Selected Work
+              <Icon name="arrow-right" class="w-4 h-4" />
+            </a>
+          </MagneticWrapper>
+        </div>
+      </ScrollReveal>
     </div>
 
-    <!-- Right Column: Visual Asset -->
-    <div class="reveal flex justify-center lg:justify-end" style="animation-delay: 0.3s;">
-      <div class="relative w-full max-w-lg aspect-square lg:aspect-[4/5] glass-panel p-2">
-        <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 relative">
-          <!-- Placeholder for the generated glassmorphism image -->
-          <img 
-            src="https://picsum.photos/seed/emerald-glass/800/1000" 
-            alt="Abstract glassmorphism representation" 
-            class="w-full h-full object-cover mix-blend-luminosity opacity-80"
-          />
-          <!-- Overlay to blend with the dark theme -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent mix-blend-overlay"></div>
-        </div>
-      </div>
+    <!-- Right Column: Terminal -->
+    <div class="flex justify-center lg:justify-end mt-12 lg:mt-0">
+      <Terminal client:load />
     </div>
 
   </div>
