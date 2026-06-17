@@ -2,6 +2,7 @@
 import type { Project } from "../data/projects";
 import Icon from "./Icon.astro";
 import { SafariMockup } from "./ui/SafariMockup";
+import { AvatarCircles } from "./ui/AvatarCircles";
 
 interface Props {
   project: Project;
@@ -17,11 +18,10 @@ const { project, index, className = "", isFeatured = false } = Astro.props;
   <!-- Content on top -->
   <div class="p-6 md:p-8 z-10 flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
-      {project.tech.map((tech) => (
-        <span class="px-3 py-1 text-xs font-mono font-medium rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-300 uppercase tracking-wide">
-          {tech}
-        </span>
-      ))}
+      <AvatarCircles 
+        client:visible 
+        avatarUrls={project.tech.map(t => `https://skillicons.dev/icons?i=${t === 'tailwindcss' ? 'tailwind' : t === 'js' ? 'javascript' : t}`)} 
+      />
     </div>
     
     <h3 class="font-bold text-slate-100 tracking-tight text-2xl md:text-3xl group-hover:text-emerald-400 transition-colors">
