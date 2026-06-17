@@ -5,12 +5,13 @@ import { motion, useScroll, useSpring, useTransform, useVelocity, useAnimationFr
 import { cn } from "../../lib/utils";
 
 interface VelocityScrollProps {
-  text: string;
+  text?: string;
   defaultVelocity?: number;
   className?: string;
+  children?: React.ReactNode;
 }
 
-export function VelocityScroll({ text, defaultVelocity = 2, className }: VelocityScrollProps) {
+export function VelocityScroll({ text, defaultVelocity = 2, className, children }: VelocityScrollProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -38,21 +39,21 @@ export function VelocityScroll({ text, defaultVelocity = 2, className }: Velocit
     baseX.set(baseX.get() + moveBy);
   });
 
+  const Content = children ? (
+    <div className={cn("flex items-center px-4", className)}>{children}</div>
+  ) : (
+    <span className={cn("block text-6xl md:text-8xl font-black uppercase tracking-tight text-slate-800/40 pr-8", className)}>
+      {text} 
+    </span>
+  );
+
   return (
     <div className="overflow-hidden m-0 whitespace-nowrap flex flex-nowrap w-full">
       <motion.div className="flex whitespace-nowrap flex-nowrap" style={{ x }}>
-        <span className={cn("block text-6xl md:text-8xl font-black uppercase tracking-tight text-slate-800/40 pr-8", className)}>
-          {text} 
-        </span>
-        <span className={cn("block text-6xl md:text-8xl font-black uppercase tracking-tight text-slate-800/40 pr-8", className)}>
-          {text} 
-        </span>
-        <span className={cn("block text-6xl md:text-8xl font-black uppercase tracking-tight text-slate-800/40 pr-8", className)}>
-          {text} 
-        </span>
-        <span className={cn("block text-6xl md:text-8xl font-black uppercase tracking-tight text-slate-800/40 pr-8", className)}>
-          {text} 
-        </span>
+        {Content}
+        {Content}
+        {Content}
+        {Content}
       </motion.div>
     </div>
   );
