@@ -174,6 +174,16 @@ export function DottedMap<M extends Marker = Marker>({
               </g>
             ) : null}
 
+            {/* Indonesia Label beneath marker */}
+            <text
+              x={x}
+              y={y + 12}
+              textAnchor="middle"
+              className="text-[6px] font-bold fill-slate-300 uppercase tracking-widest font-mono"
+            >
+              🇮🇩 INDONESIA
+            </text>
+
             {renderMarkerOverlay?.({
               marker: { ...marker, x, y },
               index,
