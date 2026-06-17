@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro";
 import { Image } from "astro:assets";
 import avatarImg from "../../public/images/avatar.png";
 
@@ -7,31 +6,29 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Timeline", href: "#timeline" },
-  { label: "Contact", href: "#contact" },
+  { label: "Experience", href: "#timeline" },
 ];
 ---
 
 <header
   id="header"
-  class="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-4xl z-50 transition-all duration-500 border border-white/20 dark:border-white/10 rounded-full bg-white/40 dark:bg-dark-secondary/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(30,64,175,0.2)]"
+  class="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-5xl z-50 transition-all duration-500 rounded-2xl glass-panel py-2 px-4"
 >
-  <nav class="px-6 h-14 flex items-center justify-between">
+  <nav class="h-12 flex items-center justify-between">
     <!-- Logo -->
     <a
       href="#"
       class="flex items-center gap-3 hover:scale-105 transition-transform"
     >
-      <Image
-        src={avatarImg}
-        alt="Irfan"
-        class="w-10 h-10 object-cover rounded-full border-2 border-primary-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-        loading="eager"
-      />
-      <span
-        class="text-xl font-bold bg-linear-to-r from-primary-600 via-primary-500 to-accent-neon bg-clip-text text-transparent tracking-tight hidden sm:block drop-shadow-sm"
-        >Irfan</span
-      >
+      <div class="w-8 h-8 rounded-full border border-emerald-500/30 overflow-hidden shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+        <Image
+          src={avatarImg}
+          alt="Irfan"
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+      </div>
+      <span class="text-lg font-bold tracking-tight hidden sm:block text-slate-100">Irfan</span>
     </a>
 
     <!-- Desktop nav -->
@@ -40,33 +37,28 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-linear-to-r after:from-primary-500 after:to-accent-neon after:transition-all after:duration-300 hover:after:w-full hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"
+            class="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors relative group"
           >
             {link.label}
+            <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))
       }
-      <ThemeToggle />
+      <div class="w-[1px] h-4 bg-slate-700 mx-2"></div>
+      <a href="#contact" class="btn-primary px-5 py-2 text-sm rounded-xl">Let's Talk</a>
     </div>
 
     <!-- Mobile menu button -->
-    <div class="flex items-center gap-3 md:hidden">
-      <ThemeToggle />
+    <div class="flex items-center md:hidden">
       <button
         id="mobile-toggle"
         aria-label="Toggle menu"
-        class="relative w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md cursor-pointer hover:shadow-[0_0_10px_rgba(59,130,246,0.3)] transition-all"
+        class="relative w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
       >
         <div class="hamburger-lines flex flex-col gap-1.5 w-5">
-          <span
-            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 origin-center rounded-full"
-          ></span>
-          <span
-            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 rounded-full"
-          ></span>
-          <span
-            class="block h-0.5 w-full bg-slate-800 dark:bg-slate-200 transition-all duration-300 origin-center rounded-full"
-          ></span>
+          <span class="block h-0.5 w-full bg-slate-200 transition-all duration-300 origin-center rounded-full"></span>
+          <span class="block h-0.5 w-full bg-slate-200 transition-all duration-300 rounded-full"></span>
+          <span class="block h-0.5 w-full bg-slate-200 transition-all duration-300 origin-center rounded-full"></span>
         </div>
       </button>
     </div>
@@ -75,73 +67,59 @@ const navLinks = [
   <!-- Mobile menu panel -->
   <div
     id="mobile-menu"
-    class="md:hidden overflow-hidden max-h-0 transition-all duration-500 absolute top-full mt-4 left-0 right-0 bg-white/70 dark:bg-dark-secondary/70 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl shadow-xl dark:shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+    class="md:hidden overflow-hidden max-h-0 transition-all duration-500"
   >
-    <div class="px-4 py-4 flex flex-col gap-1">
+    <div class="pt-4 pb-2 px-2 flex flex-col gap-1 border-t border-white/10 mt-2">
       {
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="mobile-link py-3 px-4 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all active:scale-95"
+            class="mobile-link py-3 px-4 rounded-xl text-sm font-medium text-slate-300 hover:text-emerald-400 hover:bg-white/5 transition-all active:scale-95"
           >
             {link.label}
           </a>
         ))
       }
+      <a href="#contact" class="mobile-link mt-2 text-center btn-primary py-3 rounded-xl w-full text-sm">Let's Talk</a>
     </div>
   </div>
 </header>
 
 <script is:inline>
-  // Scroll effect to shrink pill slightly and increase opacity
   const header = document.getElementById("header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-      header?.classList.add(
-        "bg-white/80",
-        "dark:bg-dark-secondary/80",
-        "py-1",
-        "shadow-lg"
-      );
-      header?.classList.remove("bg-white/40", "dark:bg-dark-secondary/40");
-    } else {
-      header?.classList.remove(
-        "bg-white/80",
-        "dark:bg-dark-secondary/80",
-        "py-1",
-        "shadow-lg"
-      );
-      header?.classList.add("bg-white/40", "dark:bg-dark-secondary/40");
-    }
-  });
-
-  // Mobile menu
   const toggle = document.getElementById("mobile-toggle");
   const menu = document.getElementById("mobile-menu");
   const lines = toggle?.querySelectorAll(".hamburger-lines span");
 
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      header?.classList.add("shadow-lg", "bg-slate-900/60");
+    } else {
+      header?.classList.remove("shadow-lg", "bg-slate-900/60");
+    }
+  });
+
   toggle?.addEventListener("click", () => {
     const isOpen = menu?.classList.contains("max-h-96");
     if (isOpen) {
-      menu?.classList.remove("max-h-96", "p-2");
-      menu?.classList.add("max-h-0");
+      menu?.classList.remove("max-h-96", "opacity-100");
+      menu?.classList.add("max-h-0", "opacity-0");
       lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
       lines?.[1]?.classList.remove("opacity-0");
       lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");
     } else {
-      menu?.classList.remove("max-h-0");
-      menu?.classList.add("max-h-96", "p-2");
+      menu?.classList.remove("max-h-0", "opacity-0");
+      menu?.classList.add("max-h-96", "opacity-100");
       lines?.[0]?.classList.add("rotate-45", "translate-y-2");
       lines?.[1]?.classList.add("opacity-0");
       lines?.[2]?.classList.add("-rotate-45", "-translate-y-2");
     }
   });
 
-  // Close mobile menu on link click
   document.querySelectorAll(".mobile-link").forEach((link) => {
     link.addEventListener("click", () => {
-      menu?.classList.remove("max-h-96", "p-2");
-      menu?.classList.add("max-h-0");
+      menu?.classList.remove("max-h-96", "opacity-100");
+      menu?.classList.add("max-h-0", "opacity-0");
       lines?.[0]?.classList.remove("rotate-45", "translate-y-2");
       lines?.[1]?.classList.remove("opacity-0");
       lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");

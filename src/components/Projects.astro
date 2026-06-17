@@ -1,58 +1,51 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
 import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
 import Icon from "./Icon.astro";
 ---
 
-<section
-  id="projects"
-  class="py-24 bg-surface-secondary dark:bg-dark-secondary"
->
-  <div class="max-w-5xl mx-auto px-6">
-    <!-- Section header -->
-    <div class="reveal text-center mb-16">
-      <h2
-        class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3"
-      >
-        Projects
+<section id="projects" class="py-32 relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Section Header (Stacked, no split, no eyebrow) -->
+    <div class="reveal flex flex-col gap-4 mb-16 max-w-2xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight">
+        Selected Work
       </h2>
-      <div class="w-12 h-1 bg-primary-600 rounded-full mx-auto mb-4"></div>
-      <p class="text-slate-500 dark:text-slate-400">Some things I've built</p>
+      <p class="text-slate-400 text-lg">
+        A collection of recent projects spanning web applications, digital systems, and custom server infrastructure.
+      </p>
     </div>
 
-    <!-- Project bento grid -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto"
-    >
+    <!-- Bento Grid (3 items -> 1+2 split) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {
         projects.map((project, index) => {
-          // Bento layout logic: make first item span 2 columns
-          const bentoClass =
-            index === 0
-              ? "md:col-span-2 lg:row-span-2 lg:col-span-2"
-              : "md:col-span-1 lg:col-span-1";
-
+          // 1+2 Split: First item spans full width
+          const isFeatured = index === 0;
+          const bentoClass = isFeatured ? "md:col-span-2 h-[400px] md:h-[500px]" : "md:col-span-1 h-[350px] md:h-[400px]";
+          
           return (
             <ProjectCard
               project={project}
               index={index}
               className={bentoClass}
+              isFeatured={isFeatured}
             />
           );
         })
       }
     </div>
 
-    <!-- GitHub CTA -->
-    <div class="reveal text-center mt-12">
+    <!-- View More / GitHub Link -->
+    <div class="reveal mt-12 flex justify-center">
       <a
         href="https://github.com/ucilmenangis"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:border-primary-500 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 hover:-translate-y-0.5"
+        class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2"
       >
         <Icon name="github" class="w-5 h-5" />
-        See More on GitHub
+        Explore more repositories
       </a>
     </div>
   </div>

@@ -1,116 +1,99 @@
 ---
 import type { Project } from "../data/projects";
-import { skillNames } from "../data/skills";
-import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 
 interface Props {
   project: Project;
   index: number;
-  className?: string; // Bento layout class
+  className?: string;
+  isFeatured?: boolean;
 }
 
-const { project, index, className = "" } = Astro.props;
+const { project, index, className = "", isFeatured = false } = Astro.props;
+
+// Anti-Slop Background Diversity:
+// Instead of all cards being identical, we vary the background treatment based on index.
+const bgVariations = [
+  // 0: Featured (Image covers full background with strong gradient)
+  "bg-slate-900 group-hover:bg-slate-800",
+  // 1: Secondary (Emerald-tinted glass)
+  "bg-emerald-950/20 border border-emerald-500/10",
+  // 2: Tertiary (Deep slate glass)
+  "bg-slate-900/40 border border-slate-700/50"
+];
+
+const bgClass = bgVariations[index % bgVariations.length];
 ---
 
-<div
-  class={`reveal group flex flex-col rounded-2xl overflow-hidden bg-white/30 dark:bg-dark-card/60 backdrop-blur-xl border border-white/40 dark:border-white/10 hover:border-primary-400 dark:hover:border-accent-neon hover:shadow-[0_15px_35px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_15px_35px_rgba(139,92,246,0.2)] transition-all duration-500 hover:-translate-y-2 relative ${className}`}
-  style={`animation-delay: ${index * 0.1}s;`}
+<article
+  class={`reveal relative group rounded-3xl overflow-hidden glass-panel-hover flex flex-col justify-end p-8 ${className} ${bgClass}`}
+  style={`animation-delay: ${index * 0.15}s;`}
 >
-  <!-- Card Internal Glow Overlay -->
-  <div class="absolute inset-0 bg-linear-to-b from-white/40 to-transparent dark:from-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 mix-blend-overlay"></div>
-
-  <!-- Project image -->
-  <div
-    class={`relative overflow-hidden bg-slate-100 dark:bg-slate-900 ${index === 0 ? 'aspect-video lg:aspect-[16/9]' : 'aspect-video'}`}
-  >
-    {
-      project.image ? (
-        <Image
+  <!-- Background Image & Gradients -->
+  {isFeatured ? (
+    <>
+      <img
+        src={project.image}
+        alt={project.title}
+        class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+    </>
+  ) : (
+    <>
+      <div class="absolute inset-0 overflow-hidden rounded-3xl">
+        <img
           src={project.image}
           alt={project.title}
-          width={800}
-          height={450}
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          class="w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700 ease-out"
           loading="lazy"
         />
-      ) : (
-        <div class="w-full h-full flex items-center justify-center bg-linear-to-br from-primary-100 to-primary-300 dark:from-primary-900/40 dark:to-accent-neon/30">
-          <Icon name="code" class="w-12 h-12 text-primary-500 dark:text-accent-neon animate-pulse" />
-        </div>
-      )
-    }
-
-    <!-- Hover overlay with links -->
-    <div
-      class="absolute inset-0 bg-slate-900/40 dark:bg-slate-900/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20"
-    >
-      <div class="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-        {
-          project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/90 text-slate-900 text-sm font-semibold rounded-xl hover:bg-white hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all"
-            >
-              <Icon name="github" class="w-4 h-4" />
-              Code
-            </a>
-          )
-        }
-        {
-          project.live && (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-primary-600 to-accent-neon text-white text-sm font-semibold rounded-xl hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] transition-all"
-            >
-              <Icon name="external-link" class="w-4 h-4" />
-              Live
-            </a>
-          )
-        }
       </div>
-    </div>
-  </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"></div>
+    </>
+  )}
 
-  <!-- Project info -->
-  <div class="p-6 relative z-10 flex flex-col grow">
-    <h3
-      class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:bg-linear-to-r group-hover:from-primary-600 group-hover:to-accent-neon group-hover:bg-clip-text group-hover:text-transparent transition-all"
-    >
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col gap-4 max-w-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+    <div class="flex flex-wrap gap-2">
+      {project.tech.map((tech) => (
+        <span class="px-3 py-1 text-xs font-mono font-medium rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-300 uppercase tracking-wide backdrop-blur-sm">
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    <h3 class={`font-bold text-slate-100 tracking-tight ${isFeatured ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
       {project.title}
     </h3>
-    <p
-      class="text-sm text-slate-600 dark:text-slate-300 mb-6 line-clamp-3 leading-relaxed grow font-medium"
-    >
+
+    <p class="text-slate-400 line-clamp-2 md:line-clamp-3 text-sm md:text-base">
       {project.description}
     </p>
 
-    <!-- Tech badges -->
-    <div
-      class="flex flex-wrap gap-2 pt-5 border-t border-slate-200/50 dark:border-slate-700/50"
-    >
-      {
-        project.tech.map((t) => (
-          <div class="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-white dark:border-white/5 shadow-sm backdrop-blur-md hover:bg-white dark:hover:bg-slate-700 hover:border-primary-300 dark:hover:border-primary-500 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)] transition-all">
-            <img
-              src={`https://skillicons.dev/icons?i=${t}`}
-              alt={t}
-              title={t}
-              width="24"
-              height="24"
-              class="w-5 h-5 drop-shadow-sm"
-              loading="lazy"
-            />
-            <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300 tracking-wide">
-              {skillNames[t] || t.toUpperCase()}
-            </span>
-          </div>
-        ))
-      }
+    <!-- Links -->
+    <div class="flex items-center gap-4 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+      {project.live && (
+        <a
+          href={project.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+        >
+          Live Demo <Icon name="external-link" class="w-4 h-4" />
+        </a>
+      )}
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+        >
+          Source Code <Icon name="github" class="w-4 h-4" />
+        </a>
+      )}
     </div>
   </div>
-</div>
+</article>

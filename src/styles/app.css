@@ -1,110 +1,141 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
-    /* Primary Accent Palette — Electric Blue */
-    --color-primary-50: #eff6ff;
-    --color-primary-100: #dbeafe;
-    --color-primary-200: #bfdbfe;
-    --color-primary-300: #93c5fd;
-    --color-primary-400: #60a5fa;
-    --color-primary-500: #3b82f6;
-    --color-primary-600: #2563eb;
-    --color-primary-700: #1d4ed8;
-    --color-primary-800: #1e40af;
-    --color-primary-900: #1e3a8a;
-
-    --color-accent-neon: #8b5cf6;
-
-    /* Surface colors (light mode – clear ice) */
-    --color-surface: #f8fafc;
-    --color-surface-secondary: #f1f5f9;
-    --color-surface-tertiary: #e2e8f0;
-    --color-surface-card: rgba(255, 255, 255, 0.6); 
-
-    /* Dark surface colors (deep void) */
-    --color-dark: #020617;
-    --color-dark-secondary: #0f172a;
-    --color-dark-tertiary: #1e293b;
-    --color-dark-card: rgba(15, 23, 42, 0.5);
-
-    /* Font family - let's keep Inter if it's imported, or upgrade to a more standard stack */
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-
-    /* Custom animations */
-    --animate-float: float 8s ease-in-out infinite;
-    --animate-float-glow: float-glow 6s ease-in-out infinite;
-    --animate-pulse-ring: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    --animate-glare: glare 3s infinite linear;
-    --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    /* Brand Accent - Emerald */
+    --color-accent: var(--color-emerald-400);
+    
+    /* Backgrounds */
+    --color-surface: #020617; /* Slate 950 */
+    --color-surface-card: rgba(15, 23, 42, 0.4); /* Slate 900 with alpha */
+    
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(15px, -20px) scale(1.02); }
-    66% { transform: translate(-15px, 15px) scale(0.98); }
-}
-
-@keyframes float-glow {
-    0%, 100% { filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5)); transform: translateY(0); }
-    50% { filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.7)); transform: translateY(-10px); }
-}
-
-@keyframes pulse-ring {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-    50% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
-}
-
-@keyframes glare {
-    0% { transform: translateX(-100%) skewX(-15deg); }
-    100% { transform: translateX(200%) skewX(-15deg); }
-}
-
-@keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-/* ---- Base Styles ---- */
+/* Base Styles */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    background-color: var(--color-surface);
 }
 
 body {
     font-family: var(--font-sans);
     overflow-x: hidden;
     background-color: var(--color-surface);
-    color: var(--color-primary-900);
-    /* Subtle light mode mesh background */
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
-    background-attachment: fixed;
+    color: #f1f5f9; /* Slate 100 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-a, button, [role="button"], .theme-toggle-btn {
-    cursor: pointer;
+/* Glassmorphism Foundation (Anti-Slop Implementation) */
+.glass-panel {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem; /* Consistent 24px radius system */
 }
 
-/* ---- Dark Mode ---- */
-.dark body {
-    background-color: var(--color-dark);
-    color: #e2e8f0;
-    /* Deep void mesh background */
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 40%),
-        radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 40%),
-        radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.2) 0px, transparent 40%);
-    background-attachment: fixed;
+.glass-panel-hover {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---- Scroll Reveal ---- */
+.glass-panel-hover:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Foundation (Tactile Push) */
+.btn-primary {
+    background: #34d399; /* Emerald 400 */
+    color: #020617; /* Slate 950 */
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+    background: #10b981; /* Emerald 500 */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #f1f5f9;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-ghost:active {
+    transform: translateY(1px);
+}
+
+/* Aurora Background Animation */
+.aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    overflow: hidden;
+    background: var(--color-surface);
+}
+
+.aurora-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+    mix-blend-mode: screen;
+}
+
+.aurora-1 {
+    top: -10%; left: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%); /* Emerald */
+    animation: drift 20s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+    bottom: -10%; right: -10%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%); /* Sky */
+    animation: drift 25s ease-in-out infinite alternate-reverse;
+}
+
+.aurora-3 {
+    top: 30%; left: 40%;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.2) 0%, transparent 70%); /* Teal */
+    animation: drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.1); }
+}
+
+/* Scroll Reveal (Vanilla implementation for lightweight intersection observing) */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -112,26 +143,22 @@ a, button, [role="button"], .theme-toggle-btn {
     transform: translateY(0);
 }
 
-/* ---- Circle Theme Transition (View Transitions API) ---- */
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+/* Fallbacks for Reduced Motion & Transparency */
+@media (prefers-reduced-motion: reduce) {
+    .aurora-orb { animation: none; opacity: 0.2; }
+    .glass-panel-hover { transition: none; transform: none !important; }
+    .btn-primary { transition: none; transform: none !important; }
+    .btn-ghost { transition: none; transform: none !important; }
+    .reveal { transition: none; opacity: 1; transform: translateY(0); }
 }
 
-::view-transition-old(root) {
-    z-index: 1;
-}
-
-::view-transition-new(root) {
-    z-index: 9999;
-}
-
-/* When going from dark → light, reverse the stacking */
-.dark::view-transition-old(root) {
-    z-index: 9999;
-}
-
-.dark::view-transition-new(root) {
-    z-index: 1;
+@media (prefers-reduced-transparency: reduce) {
+    .glass-panel {
+        background: #0f172a; /* Solid Slate 900 */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    .glass-panel-hover:hover {
+        background: #1e293b; /* Solid Slate 800 */
+    }
 }

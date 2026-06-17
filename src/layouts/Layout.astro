@@ -13,7 +13,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,44 +29,36 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <title>{title}</title>
-
-    <!-- Dark mode FOUC prevention -->
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem("theme");
-        if (
-          stored === "dark" ||
-          (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
   </head>
-  <body
-    class="bg-surface text-primary-800 dark:bg-dark dark:text-primary-200 transition-colors duration-300 antialiased overflow-hidden"
-  >
-    <!-- Preloader -->
+  <body class="bg-slate-950 text-slate-100 antialiased overflow-hidden selection:bg-emerald-500/30 selection:text-emerald-100">
+    <!-- Aurora Background Layer -->
+    <div class="aurora-bg">
+        <div class="aurora-orb aurora-1"></div>
+        <div class="aurora-orb aurora-2"></div>
+        <div class="aurora-orb aurora-3"></div>
+    </div>
+
+    <!-- Premium Preloader -->
     <div
       id="preloader"
-      class="fixed inset-0 z-[9999] bg-surface dark:bg-dark flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out"
+      class="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center transition-all duration-700 ease-in-out"
     >
-      <div class="relative w-20 h-20 mb-6">
-        <div class="absolute inset-0 rounded-full border-4 border-primary-200 dark:border-slate-800"></div>
-        <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-primary-600 dark:border-t-accent-neon animate-spin shadow-[0_0_15px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(139,92,246,0.5)]"></div>
-        <div class="absolute inset-0 rounded-full border-4 border-transparent border-b-primary-400 dark:border-b-primary-600 animate-[spin_2s_linear_infinite_reverse]"></div>
+      <div class="relative flex items-center justify-center">
+        <!-- Minimal pulsing ring instead of chaotic spinners -->
+        <div class="w-16 h-16 rounded-full border border-emerald-500/20 animate-ping"></div>
+        <div class="absolute w-12 h-12 rounded-full border border-emerald-400/40"></div>
+        <span class="absolute font-mono text-xs tracking-widest text-emerald-400 uppercase">Load</span>
       </div>
-      <span class="text-2xl font-black bg-linear-to-r from-primary-600 to-accent-neon bg-clip-text text-transparent tracking-widest uppercase animate-pulse drop-shadow-sm">Irfan</span>
     </div>
 
     <slot />
 
-    <!-- Scroll reveal observer -->
+    <!-- Vanilla Scroll Reveal & Preloader Logic -->
     <script is:inline>
       const observer = new IntersectionObserver(
         (entries) => {
@@ -78,21 +70,19 @@ const {
         },
         { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
       );
+      
       document
         .querySelectorAll(".reveal")
         .forEach((el) => observer.observe(el));
       
-      // Preloader logic
       window.addEventListener("load", () => {
         const preloader = document.getElementById("preloader");
         if (preloader) {
-          preloader.classList.add("opacity-0");
-          // Restore scrolling functionality
+          preloader.classList.add("opacity-0", "pointer-events-none", "scale-105");
           document.body.classList.remove("overflow-hidden");
-          
           setTimeout(() => {
             preloader.style.display = "none";
-          }, 700); // Wait for transition duration
+          }, 700);
         }
       });
     </script>

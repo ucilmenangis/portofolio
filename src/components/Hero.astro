@@ -1,121 +1,55 @@
 ---
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
-import avatarImg from "../../public/images/avatar.png";
 ---
 
 <section
-    id="hero"
-    class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+  id="hero"
+  class="relative min-h-[100dvh] flex items-center pt-24 pb-12 overflow-hidden"
 >
-    <!-- Animated background mesh -->
-    <div class="absolute inset-0 -z-10">
-        <div
-            class="absolute top-1/4 -left-20 w-72 h-72 bg-primary-400/30 dark:bg-primary-600/20 rounded-full blur-[80px] animate-float-glow"
-        >
-        </div>
-        <div
-            class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-neon/20 dark:bg-accent-neon/15 rounded-full blur-[100px] animate-float-glow"
-            style="animation-delay: -3s;"
-        >
-        </div>
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-primary-300/20 dark:bg-primary-900/10 rounded-full blur-[120px]"
-        >
-        </div>
-        <!-- Grid pattern -->
-        <div
-            class="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.05)_1px,transparent_1px)]"
-        >
-        </div>
+  <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+    
+    <!-- Left Column: Copy & CTA -->
+    <div class="flex flex-col items-start gap-6 max-w-xl">
+      <!-- 1. Eyebrow -->
+      <span class="font-mono text-xs uppercase tracking-[0.2em] text-emerald-400">
+        Developer & Designer
+      </span>
+
+      <!-- 2. Headline -->
+      <h1 class="reveal text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-100 leading-[1.1]">
+        Building digital <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">experiences</span>
+      </h1>
+
+      <!-- 3. Subtext (19 words) -->
+      <p class="reveal text-lg md:text-xl text-slate-400 leading-relaxed max-w-[45ch] font-medium" style="animation-delay: 0.1s;">
+        I craft modern web and mobile applications with clean architecture and thoughtful, premium design. Turning ideas into real products.
+      </p>
+
+      <!-- 4. CTAs -->
+      <div class="reveal flex flex-wrap gap-4 mt-4" style="animation-delay: 0.2s;">
+        <a href="#projects" class="btn-primary px-8 py-4 rounded-xl flex items-center gap-2">
+          View Selected Work
+          <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <!-- Name -->
-        <h1
-            class="reveal text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4"
-        >
-            <span class="text-slate-800 dark:text-slate-100">Hi, I'm </span>
-            <span
-                class="bg-linear-to-r from-primary-600 via-primary-500 to-accent-neon bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.4)] dark:drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
-                >Irfan</span
-            >
-        </h1>
-
-        <!-- Role -->
-        <p
-            class="reveal text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-300 mb-6"
-            style="animation-delay: 0.1s;"
-        >
-            Fullstack Developer
-        </p>
-
-        <!-- Tagline -->
-        <p
-            class="reveal max-w-2xl mx-auto text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium"
-            style="animation-delay: 0.2s;"
-        >
-            I build modern web and mobile applications with clean code and
-            thoughtful design. Turning ideas into real, functional products.
-        </p>
-
-        <!-- CTA buttons -->
-        <div
-            class="reveal flex flex-wrap gap-4 justify-center"
-            style="animation-delay: 0.3s;"
-        >
-            <a
-                href="#projects"
-                class="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-primary-600 to-accent-neon text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:-translate-y-1 relative overflow-hidden group border border-white/20"
-            >
-                <div class="absolute inset-0 w-full h-full bg-white/20 blur-md -skew-x-[30deg] -translate-x-full group-hover:animate-glare"></div>
-                <span class="relative z-10 flex items-center gap-2">
-                    View My Work
-                    <Icon name="chevron-down" class="w-4 h-4 -rotate-90" />
-                </span>
-            </a>
-            <a
-                href="mailto:ucilmenangis@gmail.com"
-                class="inline-flex items-center gap-2 px-8 py-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md text-slate-800 dark:text-white font-semibold rounded-2xl hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 hover:-translate-y-1 border border-slate-200 dark:border-white/10"
-            >
-                <Icon name="envelope" class="w-5 h-5 text-primary-500 dark:text-accent-neon" />
-                Get In Touch
-            </a>
+    <!-- Right Column: Visual Asset -->
+    <div class="reveal flex justify-center lg:justify-end" style="animation-delay: 0.3s;">
+      <div class="relative w-full max-w-lg aspect-square lg:aspect-[4/5] glass-panel p-2">
+        <div class="w-full h-full rounded-2xl overflow-hidden bg-slate-900 relative">
+          <!-- Placeholder for the generated glassmorphism image -->
+          <img 
+            src="https://picsum.photos/seed/emerald-glass/800/1000" 
+            alt="Abstract glassmorphism representation" 
+            class="w-full h-full object-cover mix-blend-luminosity opacity-80"
+          />
+          <!-- Overlay to blend with the dark theme -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent mix-blend-overlay"></div>
         </div>
-
-        <!-- Avatar -->
-        <div
-            class="reveal mt-16 flex justify-center"
-            style="animation-delay: 0.4s;"
-        >
-            <div class="relative group">
-                <div class="absolute inset-0 bg-primary-500/30 blur-2xl rounded-full group-hover:bg-accent-neon/40 transition-colors duration-500"></div>
-                <div
-                    class="w-32 h-32 rounded-full bg-linear-to-br from-primary-400 via-primary-600 to-accent-neon p-1 animate-pulse-ring relative z-10"
-                >
-                    <div
-                        class="w-full h-full rounded-full bg-white dark:bg-dark-secondary flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-900 shadow-inner"
-                    >
-                        <Image
-                            src={avatarImg}
-                            alt="Irfan Avatar"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            loading="eager"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div
-            class="reveal mt-16 animate-bounce-slow"
-            style="animation-delay: 0.5s;"
-        >
-            <Icon
-                name="chevron-down"
-                class="w-6 h-6 mx-auto text-primary-400 dark:text-primary-600"
-            />
-        </div>
+      </div>
     </div>
+
+  </div>
 </section>
