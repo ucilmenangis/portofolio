@@ -33,21 +33,23 @@ import { ScrollReveal } from "./ui/ScrollReveal";
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#020617_70%)] z-10 pointer-events-none"></div>
         
         <!-- The Map -->
-        <div class="absolute inset-0 opacity-60">
-          <DottedMap client:visible cr={1} cx={1} cy={1} width={16} height={16} />
+        <div class="absolute inset-0 opacity-100">
+          <DottedMap 
+            client:visible 
+            mapSamples={8000}
+            dotColor="#334155" 
+            dotRadius={0.3}
+            markerColor="#10b981"
+            pulse={true}
+            markers={[
+              { lat: -8.17, lng: 113.7, size: 2.5 } // Jember, Indonesia
+            ]}
+          />
         </div>
 
-        <!-- Indonesia Marker / Flag Pulse -->
-        <div class="absolute z-20 flex flex-col items-center justify-center transform translate-x-24 translate-y-12">
-          <!-- Radar rings -->
-          <div class="absolute w-16 h-16 bg-emerald-500/20 rounded-full animate-ping"></div>
-          <div class="absolute w-8 h-8 bg-emerald-500/40 rounded-full animate-pulse"></div>
-          
-          <!-- Core marker -->
-          <div class="w-3 h-3 bg-emerald-400 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)] z-30"></div>
-          
-          <!-- Label -->
-          <div class="mt-4 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-xs font-mono text-slate-300 backdrop-blur-sm z-30 flex items-center gap-2 shadow-xl">
+        <!-- Label (Absolutely positioned relative to the container since markers are drawn by SVG) -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+          <div class="mt-40 ml-48 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-xs font-mono text-slate-300 backdrop-blur-sm shadow-xl flex items-center gap-2">
             <span class="text-[10px]">🇮🇩</span> INDONESIA
           </div>
         </div>

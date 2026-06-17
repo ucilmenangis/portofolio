@@ -21,6 +21,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icon-cloud": "^4.1.7",
+    "svg-dotted-map": "^2.0.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.2.1"
   }

@@ -1,70 +1,189 @@
-'use client';
+"use client"
+import * as React from "react"
+import { createMap } from "svg-dotted-map"
 
-import React, { useId } from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/utils"
 
-interface DotPatternProps {
-  width?: any;
-  height?: any;
-  x?: any;
-  y?: any;
-  cx?: any;
-  cy?: any;
-  cr?: any;
-  className?: string;
-  [key: string]: any;
+export interface Marker {
+  lat: number
+  lng: number
+  size?: number
+  pulse?: boolean
 }
 
-export function DottedMap({
-  width = 16,
-  height = 16,
-  x = 0,
-  y = 0,
-  cx = 1,
-  cy = 1,
-  cr = 1,
+/** addMarkers returns markers with lat/lng removed; only x, y and other props (e.g. size) remain */
+type MapMarker<M extends Marker> = Omit<M, "lat" | "lng"> & {
+  x: number
+  y: number
+}
+
+export interface DottedMapProps<
+  M extends Marker = Marker,
+> extends React.SVGProps<SVGSVGElement> {
+  width?: number
+  height?: number
+  mapSamples?: number
+  markers?: M[]
+  dotColor?: string
+  markerColor?: string
+  dotRadius?: number
+  stagger?: boolean
+  pulse?: boolean
+
+  renderMarkerOverlay?: (args: {
+    marker: MapMarker<M>
+    index: number
+    x: number
+    y: number
+    r: number
+  }) => React.ReactNode
+}
+
+export function DottedMap<M extends Marker = Marker>({
+  width = 150,
+  height = 75,
+  mapSamples = 5000,
+  markers = [],
+  dotColor = "currentColor",
+  markerColor = "#10B981", // Emerald 500
+  dotRadius = 0.2,
+  stagger = true,
+  pulse = false,
+  renderMarkerOverlay,
   className,
-  ...props
-}: DotPatternProps) {
-  const id = useId();
+  style,
+  ...svgProps
+}: DottedMapProps<M>) {
+  const { points, addMarkers } = createMap({
+    width,
+    height,
+    mapSamples,
+  })
+  const processedMarkers = addMarkers(markers)
+
+  // Compute stagger helpers in a single, simple pass
+  const { xStep, yToRowIndex } = React.useMemo(() => {
+    const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x)
+    const rowMap = new Map<number, number>()
+    let step = 0
+    let prevY = Number.NaN
+    let prevXInRow = Number.NaN
+
+    for (const p of sorted) {
+      if (p.y !== prevY) {
+        // new row
+        prevY = p.y
+        prevXInRow = Number.NaN
+        if (!rowMap.has(p.y)) rowMap.set(p.y, rowMap.size)
+      }
+      if (!Number.isNaN(prevXInRow)) {
+        const delta = p.x - prevXInRow
+        if (delta > 0) step = step === 0 ? delta : Math.min(step, delta)
+      }
+      prevXInRow = p.x
+    }
+
+    return { xStep: step || 1, yToRowIndex: rowMap }
+  }, [points])
 
   return (
-    <div className={cn("relative flex h-full w-full items-center justify-center overflow-hidden bg-slate-950", className)}>
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full fill-slate-800"
-        {...props}
-      >
-        <defs>
-          <pattern
-            id={id}
-            width={width}
-            height={height}
-            patternUnits="userSpaceOnUse"
-            patternContentUnits="userSpaceOnUse"
-            x={x}
-            y={y}
-          >
-            <circle id="pattern-circle" cx={cx} cy={cy} r={cr} />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${id})`} />
-      </svg>
-      
-      {/* Location Pin */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative flex items-center justify-center">
-          <div className="w-4 h-4 bg-emerald-500 rounded-full animate-ping absolute"></div>
-          <div className="w-2 h-2 bg-emerald-400 rounded-full relative z-10"></div>
-          <span className="absolute top-6 whitespace-nowrap text-xs font-bold text-emerald-400 tracking-widest uppercase">
-            Jember, ID
-          </span>
-        </div>
-      </div>
-      
-      {/* Gradient Mask for fading out edges */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950"></div>
-    </div>
-  );
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className={cn("text-slate-800 dark:text-slate-800", className)}
+      style={{ width: "100%", height: "100%", ...style }}
+      {...svgProps}
+    >
+      {points.map((point, index) => {
+        const rowIndex = yToRowIndex.get(point.y) ?? 0
+        const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0
+        return (
+          <circle
+            cx={point.x + offsetX}
+            cy={point.y}
+            r={dotRadius}
+            fill={dotColor}
+            key={`${point.x}-${point.y}-${index}`}
+          />
+        )
+      })}
+
+      {processedMarkers.map((marker, index) => {
+        const rowIndex = yToRowIndex.get(marker.y) ?? 0
+        const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0
+
+        const x = marker.x + offsetX
+        const y = marker.y
+        const r = marker.size ?? dotRadius * 3 // Make marker a bit larger than dots
+        const shouldPulse = pulse
+          ? marker.pulse !== false
+          : marker.pulse === true
+        const pulseTo = r * 2.8
+
+        return (
+          <g key={`${marker.x}-${marker.y}-${index}`}>
+            <circle cx={x} cy={y} r={r} fill={markerColor} />
+
+            {shouldPulse ? (
+              <g pointerEvents="none">
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={r}
+                  fill="none"
+                  stroke={markerColor}
+                  strokeOpacity={1}
+                  strokeWidth={0.35}
+                >
+                  <animate
+                    attributeName="r"
+                    values={`${r};${pulseTo}`}
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="1;0"
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={r}
+                  fill="none"
+                  stroke={markerColor}
+                  strokeOpacity={0.9}
+                  strokeWidth={0.3}
+                >
+                  <animate
+                    attributeName="r"
+                    values={`${r};${pulseTo}`}
+                    dur="1.4s"
+                    begin="0.7s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.9;0"
+                    dur="1.4s"
+                    begin="0.7s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </g>
+            ) : null}
+
+            {renderMarkerOverlay?.({
+              marker: { ...marker, x, y },
+              index,
+              x,
+              y,
+              r,
+            })}
+          </g>
+        )
+      })}
+    </svg>
+  )
 }

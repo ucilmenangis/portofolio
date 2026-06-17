@@ -2,6 +2,7 @@
 import { skillCategories } from "../data/skills";
 import { TextAnimate } from "./ui/TextAnimate";
 import { IconCloud } from "./ui/IconCloud";
+import { TechList } from "./ui/TechList";
 
 const slugs = [
   "html5", "css3", "javascript", "typescript", "react", "tailwindcss",
@@ -25,42 +26,8 @@ const slugs = [
     <!-- 2-Column Layout: Left = Categories, Right = IconCloud -->
     <div class="grid lg:grid-cols-2 gap-16 items-center">
       
-      <!-- Left: Text List -->
-      <div class="grid sm:grid-cols-2 gap-12">
-        {
-          skillCategories.map((category, catIdx) => (
-            <div
-              class="reveal flex flex-col gap-6"
-              style={`animation-delay: ${catIdx * 0.1}s;`}
-            >
-              <h3 class="text-lg font-semibold text-slate-300 border-b border-slate-800 pb-4">
-                {category.title}
-              </h3>
-
-              <ul class="flex flex-col gap-4">
-                {category.skills.map((skill) => (
-                  <li class="flex items-center gap-4 group">
-                    <div class="w-14 h-14 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-center group-hover:border-emerald-500/30 group-hover:-translate-y-1 transition-all duration-300 shadow-lg relative overflow-hidden">
-                      <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      <img
-                        src={`https://skillicons.dev/icons?i=${skill.icon}`}
-                        alt={skill.name}
-                        width="32"
-                        height="32"
-                        class="opacity-80 group-hover:opacity-100 transition-opacity z-10"
-                        loading="lazy"
-                      />
-                    </div>
-                    <span class="text-base font-semibold text-slate-400 group-hover:text-emerald-400 transition-colors">
-                      {skill.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
+      <!-- Left: Text List with Magic UI AnimatedList -->
+      <TechList client:visible />
 
       <!-- Right: Interactive Icon Cloud -->
       <div class="relative w-full h-[400px] lg:h-[600px] flex items-center justify-center reveal">
