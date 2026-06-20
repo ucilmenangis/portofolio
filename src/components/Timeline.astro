@@ -58,7 +58,7 @@ import { Particles } from "./ui/Particles";
 
                     <div class={`flex flex-wrap items-center gap-2 text-slate-400 font-medium mb-4 ${isLeft ? 'md:flex-row-reverse md:justify-start' : 'md:justify-start'}`}>
                       {item.logo && (
-                        <img src={item.logo} alt={item.organization} class="w-6 h-6 rounded-full bg-slate-800 object-cover shrink-0" />
+                        <img src={item.logo} alt={item.organization} class="h-8 w-auto max-w-[140px] object-contain shrink-0" />
                       )}
                       <span class={isLeft ? 'md:text-right' : 'md:text-left'}>{item.organization}</span>
                       {item.location && (
