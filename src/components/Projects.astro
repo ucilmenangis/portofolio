@@ -5,21 +5,16 @@ import Icon from "./Icon.astro";
 import { BlurFade } from "./ui/BlurFade";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
-import { GridPattern } from "./ui/GridPattern";
+import { Particles } from "./ui/Particles";
 ---
 
 <section id="projects" class="py-16 relative z-10 overflow-hidden">
-  <!-- Grid Pattern Background -->
-  <GridPattern 
-    width={40}
-    height={40}
-    x={-1}
-    y={-1}
-    strokeDasharray="4 2"
-    className="opacity-[0.2] text-emerald-500/20 [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]"
-  />
+  <!-- Particles Background -->
+  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
+    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
+  </div>
 
-  <div class="max-w-5xl mx-auto px-6 relative">
+  <div class="max-w-5xl mx-auto px-6 relative z-10">
     <!-- Section Header -->
     <div class="flex flex-col gap-4 mb-16 max-w-2xl">
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">

@@ -1,11 +1,16 @@
 ---
 import { DottedMap } from "./ui/DottedMap";
 import { ScrollReveal } from "./ui/ScrollReveal";
-import { InteractiveGridPattern } from "./ui/InteractiveGridPattern";
+import { Particles } from "./ui/Particles";
 ---
 
-<section id="map" class="py-24 relative z-10 bg-slate-950">
-  <div class="max-w-7xl mx-auto px-6">
+<section id="map" class="py-24 relative z-10 bg-slate-950 overflow-hidden">
+  <!-- Particles Background -->
+  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
+    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-16">
       <!-- Text content -->
       <div class="w-full lg:w-1/3 flex flex-col gap-6">

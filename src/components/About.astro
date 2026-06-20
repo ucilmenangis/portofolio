@@ -6,6 +6,7 @@ import { AvatarCircles } from "./ui/AvatarCircles";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
 import { AnimatedGridPattern } from "./ui/AnimatedGridPattern";
+import { Particles } from "./ui/Particles";
 import { GitCommitGrid } from "./ui/GitCommitGrid";
 import { projects } from "../data/projects";
 
@@ -17,9 +18,14 @@ const techAvatars = [
 ];
 ---
 
-<section id="about" class="py-24 relative z-10">
-  <div class="max-w-7xl mx-auto px-6">
-    <AnimatedGridPattern client:visible className="opacity-40" />
+<section id="about" class="py-24 relative z-10 overflow-hidden bg-slate-950 border-t border-slate-900">
+  
+  <!-- Particles Background -->
+  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
+    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
     <!-- Content Grid -->
     <div class="grid md:grid-cols-2 gap-10 items-start relative z-10 mt-8">
       <!-- Left: Header, Stats & Bio -->

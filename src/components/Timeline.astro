@@ -7,14 +7,16 @@ import { TextAnimate } from "./ui/TextAnimate";
 import { AvatarCircles } from "./ui/AvatarCircles";
 import { ScrollLine } from "./ui/ScrollLine";
 import { ScrollHighlight } from "./ui/ScrollHighlight";
-import { HexagonPattern } from "./ui/HexagonPattern";
+import { Particles } from "./ui/Particles";
 ---
 
 <section id="timeline" class="py-24 relative z-10 overflow-hidden">
-  <!-- Hexagon Pattern Background -->
-  <HexagonPattern size={40} className="opacity-[0.03] text-emerald-500" />
+  <!-- Particles Background -->
+  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
+    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
+  </div>
   
-  <div class="max-w-5xl mx-auto px-6 relative">
+  <div class="max-w-5xl mx-auto px-6 relative z-10">
     <!-- Section Header -->
     <div class="reveal flex flex-col items-center gap-4 mb-20 text-center">
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
