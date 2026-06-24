@@ -1,0 +1,247 @@
+---
+import { ScrollReveal } from "./ui/ScrollReveal";
+import { TextAnimate } from "./ui/TextAnimate";
+
+const pricingTiers = [
+  {
+    name: "Basic",
+    description: "Perfect for simple landing pages or minimal MVPs.",
+    webPrice: "500.000",
+    androidPrice: "1.000.000",
+    popular: false,
+    webFeatures: [
+      "Modern Single Page",
+      "Responsive Design",
+      "Basic SEO Setup",
+      "Standard Support"
+    ],
+    androidFeatures: [
+      "Single Screen MVP",
+      "Basic UI/UX",
+      "Local Storage",
+      "Standard Support"
+    ]
+  },
+  {
+    name: "Pro",
+    description: "Full-stack apps tailored for growing businesses.",
+    webPrice: "1.500.000",
+    androidPrice: "3.000.000",
+    popular: true,
+    webFeatures: [
+      "Custom Backend API",
+      "Database Integration",
+      "User Authentication",
+      "Priority Support"
+    ],
+    androidFeatures: [
+      "REST API Integration",
+      "Push Notifications",
+      "Firebase Analytics",
+      "Priority Support"
+    ]
+  },
+  {
+    name: "Advanced",
+    description: "Enterprise-grade scalable and custom solutions.",
+    webPrice: "5.000.000",
+    androidPrice: "10.000.000",
+    popular: false,
+    webFeatures: [
+      "Complex Architecture",
+      "Cloud Infrastructure",
+      "Advanced Security",
+      "24/7 Dedicated Support"
+    ],
+    androidFeatures: [
+      "Complex Architecture",
+      "Real-time Data Sync",
+      "Advanced Security",
+      "24/7 Dedicated Support"
+    ]
+  }
+];
+---
+
+<section id="pricing" class="py-24 relative z-10 overflow-hidden bg-slate-950 border-t border-slate-900 content-auto">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex justify-center mb-4">
+        <TextAnimate client:visible text="Pricing Plans" delay={0.2} />
+      </h2>
+      <ScrollReveal client:visible delay={0.3}>
+        <p class="text-slate-400 text-lg mb-8">
+          Transparent starting prices for custom web and Android development.
+        </p>
+      </ScrollReveal>
+
+      <!-- Platform Toggle (Web / Android) -->
+      <ScrollReveal client:visible delay={0.4} className="flex justify-center">
+        <div class="inline-flex items-center p-1 bg-slate-900/80 border border-slate-800 rounded-2xl glass-panel relative z-20">
+          <button 
+            id="btn-web" 
+            class="platform-btn active relative w-32 py-2.5 text-sm font-semibold rounded-xl text-slate-950 transition-all z-10"
+          >
+            Web App
+          </button>
+          <button 
+            id="btn-android" 
+            class="platform-btn relative w-32 py-2.5 text-sm font-semibold rounded-xl text-slate-400 hover:text-slate-200 transition-all z-10"
+          >
+            Android App
+          </button>
+          
+          <!-- Moving Highlight Background -->
+          <div id="toggle-highlight" class="absolute left-1 top-1 bottom-1 w-32 bg-emerald-400 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] z-0"></div>
+        </div>
+      </ScrollReveal>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      {pricingTiers.map((tier, i) => (
+        <ScrollReveal client:visible delay={0.2 + i * 0.1} className={`flex ${tier.popular ? '-mt-4 md:-mt-8' : ''}`}>
+          <div class={`w-full flex flex-col rounded-3xl p-8 glass-panel glass-panel-hover relative overflow-hidden ${tier.popular ? 'border-2 border-emerald-500/80 shadow-[0_0_30px_rgba(16,185,129,0.2)] bg-slate-900/80' : 'border border-slate-800 bg-slate-900/40'}`}>
+            
+            {tier.popular && (
+              <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+            )}
+            
+            {tier.popular && (
+              <div class="absolute top-4 right-4">
+                <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">Most Popular</span>
+              </div>
+            )}
+
+            <h3 class="text-2xl font-bold text-slate-100 mb-2">{tier.name}</h3>
+            <p class="text-sm text-slate-400 mb-6 h-10">{tier.description}</p>
+            
+            <div class="flex flex-col gap-1 mb-8">
+              <div class="flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-100 price-display transition-all duration-300" data-web={tier.webPrice} data-android={tier.androidPrice}>
+                  Rp {tier.webPrice}
+                </span>
+              </div>
+              <p class="text-xs text-emerald-400/80 font-medium mt-2">* Starting price</p>
+            </div>
+
+            <div class="w-full h-[1px] bg-slate-800 mb-6"></div>
+            
+            <!-- Web Features -->
+            <ul class="features-list web-features flex flex-col gap-4 mb-8 flex-1 transition-all duration-300">
+              {tier.webFeatures.map(feature => (
+                <li class="flex items-start gap-3">
+                  <div class="mt-1 flex-shrink-0 text-emerald-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="text-sm text-slate-300">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- Android Features (Hidden by default) -->
+            <ul class="features-list android-features hidden flex-col gap-4 mb-8 flex-1 transition-all duration-300">
+              {tier.androidFeatures.map(feature => (
+                <li class="flex items-start gap-3">
+                  <div class="mt-1 flex-shrink-0 text-emerald-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="text-sm text-slate-300">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a 
+              href="https://t.me/ucilmenangis" 
+              target="_blank" 
+              class={`w-full py-3 rounded-xl text-center font-semibold transition-all active:scale-95 ${tier.popular ? 'btn-primary text-slate-950' : 'bg-white/5 text-slate-200 hover:bg-white/10 border border-white/10'}`}
+            >
+              Get Started
+            </a>
+          </div>
+        </ScrollReveal>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  const btnWeb = document.getElementById("btn-web");
+  const btnAndroid = document.getElementById("btn-android");
+  const highlight = document.getElementById("toggle-highlight");
+  const priceDisplays = document.querySelectorAll(".price-display");
+  
+  const webFeatures = document.querySelectorAll(".web-features");
+  const androidFeatures = document.querySelectorAll(".android-features");
+
+  if (btnWeb && btnAndroid && highlight) {
+    btnWeb.addEventListener("click", () => {
+      // Move highlight
+      highlight.style.transform = "translateX(0)";
+      
+      // Update button styles
+      btnWeb.classList.replace("text-slate-400", "text-slate-950");
+      btnWeb.classList.remove("hover:text-slate-200");
+      
+      btnAndroid.classList.replace("text-slate-950", "text-slate-400");
+      btnAndroid.classList.add("hover:text-slate-200");
+
+      // Update Prices with animation
+      priceDisplays.forEach(display => {
+        display.style.opacity = "0";
+        setTimeout(() => {
+          display.textContent = "Rp " + display.getAttribute("data-web");
+          display.style.opacity = "1";
+        }, 150);
+      });
+
+      // Update Feature Lists
+      webFeatures.forEach(el => {
+        el.classList.remove("hidden");
+        el.classList.add("flex");
+      });
+      androidFeatures.forEach(el => {
+        el.classList.add("hidden");
+        el.classList.remove("flex");
+      });
+    });
+
+    btnAndroid.addEventListener("click", () => {
+      // Move highlight
+      highlight.style.transform = "translateX(128px)";
+      
+      // Update button styles
+      btnAndroid.classList.replace("text-slate-400", "text-slate-950");
+      btnAndroid.classList.remove("hover:text-slate-200");
+      
+      btnWeb.classList.replace("text-slate-950", "text-slate-400");
+      btnWeb.classList.add("hover:text-slate-200");
+
+      // Update Prices with animation
+      priceDisplays.forEach(display => {
+        display.style.opacity = "0";
+        setTimeout(() => {
+          display.textContent = "Rp " + display.getAttribute("data-android");
+          display.style.opacity = "1";
+        }, 150);
+      });
+
+      // Update Feature Lists
+      androidFeatures.forEach(el => {
+        el.classList.remove("hidden");
+        el.classList.add("flex");
+      });
+      webFeatures.forEach(el => {
+        el.classList.add("hidden");
+        el.classList.remove("flex");
+      });
+    });
+  }
+</script>

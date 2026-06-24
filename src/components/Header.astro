@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#timeline" },
+  { label: "Pricing", href: "#pricing" },
 ];
 ---
 
@@ -132,4 +133,29 @@ const navLinks = [
       lines?.[2]?.classList.remove("-rotate-45", "-translate-y-2");
     });
   });
+
+  // Active section highlighting
+  const sections = document.querySelectorAll("section[id]");
+  const navItems = document.querySelectorAll("nav a[href^='#']");
+  
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navItems.forEach((link) => {
+          link.classList.remove("text-emerald-400");
+          link.classList.add("text-slate-300");
+          const indicator = link.querySelector("span.absolute");
+          if (indicator) indicator.classList.remove("w-full");
+          
+          if (link.getAttribute("href") === `#${entry.target.id}`) {
+            link.classList.remove("text-slate-300");
+            link.classList.add("text-emerald-400");
+            if (indicator) indicator.classList.add("w-full");
+          }
+        });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-20% 0px -60% 0px" });
+
+  sections.forEach((section) => sectionObserver.observe(section));
 </script>

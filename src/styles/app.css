@@ -19,6 +19,12 @@ html {
     background-color: var(--color-surface);
 }
 
+/* Performance class for heavy off-screen sections */
+.content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 1000px;
+}
+
 body {
     font-family: var(--font-sans);
     overflow-x: hidden;

@@ -3,7 +3,7 @@ import { skillCategories } from "../data/skills";
 import { TextAnimate } from "./ui/TextAnimate";
 import { IconCloud } from "./ui/IconCloud";
 import { TechList } from "./ui/TechList";
-import { Particles } from "./ui/Particles";
+
 
 const slugs = [
   "html5", "css3", "javascript", "typescript", "react", "tailwindcss",
@@ -12,11 +12,8 @@ const slugs = [
 ];
 ---
 
-<section id="skills" class="py-24 relative z-10 overflow-hidden">
-  <!-- Particles Background -->
-  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
-    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
-  </div>
+<section id="skills" class="py-24 relative z-10 overflow-hidden content-auto">
+
 
   <div class="max-w-7xl mx-auto px-6 relative z-10">
     <!-- Section Header (Stacked) -->

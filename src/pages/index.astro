@@ -8,13 +8,20 @@ import TechStack from "../components/TechStack.astro";
 import Projects from "../components/Projects.astro";
 import Timeline from "../components/Timeline.astro";
 import Certifications from "../components/Certifications.astro";
+import Pricing from "../components/Pricing.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import { Particles } from "../components/ui/Particles";
 ---
 
 <Layout>
+  <!-- Global Particles Background (Huge Performance Boost vs rendering per-section) -->
+  <div class="fixed inset-0 z-0 opacity-50 pointer-events-none">
+    <Particles client:load quantity={120} ease={80} color="#10b981" refresh />
+  </div>
+
   <Header />
-  <main>
+  <main class="relative z-10">
     <Hero />
     <About />
     <MapSection />
@@ -22,6 +29,7 @@ import Footer from "../components/Footer.astro";
     <Projects />
     <Timeline />
     <Certifications />
+    <Pricing />
     <Contact />
   </main>
   <Footer />

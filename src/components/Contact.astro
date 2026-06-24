@@ -1,14 +1,11 @@
 ---
 import Icon from "./Icon.astro";
 import { CoolMode } from "./ui/CoolMode";
-import { Particles } from "./ui/Particles";
+
 ---
 
 <section id="contact" class="py-32 relative z-10 overflow-hidden">
-  <!-- Particles Background -->
-  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
-    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
-  </div>
+
 
   <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
     
@@ -22,13 +19,14 @@ import { Particles } from "./ui/Particles";
       </p>
 
       <div class="mt-4">
-        <CoolMode client:load>
+        <CoolMode client:visible>
           <a
-            href="mailto:ucilmenangis@gmail.com"
+            href="https://t.me/ucilmenangis"
+            target="_blank"
             class="btn-primary inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg hover:scale-105 transition-transform"
           >
-            <Icon name="mail" class="w-5 h-5" />
-            Send me an email
+            <Icon name="telegram" class="w-5 h-5" />
+            Chat on Telegram
           </a>
         </CoolMode>
       </div>
@@ -39,7 +37,7 @@ import { Particles } from "./ui/Particles";
           href="https://github.com/ucilmenangis"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-500 hover:text-emerald-400 transition-colors"
+          class="text-slate-400 hover:text-emerald-400 transition-colors"
           aria-label="GitHub"
         >
           <Icon name="github" class="w-6 h-6" />
@@ -48,7 +46,7 @@ import { Particles } from "./ui/Particles";
           href="https://www.linkedin.com/in/irfan-arrafi/"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-500 hover:text-emerald-400 transition-colors"
+          class="text-slate-400 hover:text-emerald-400 transition-colors"
           aria-label="LinkedIn"
         >
           <Icon name="linkedin" class="w-6 h-6" />

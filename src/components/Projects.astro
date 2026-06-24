@@ -5,14 +5,11 @@ import Icon from "./Icon.astro";
 import { BlurFade } from "./ui/BlurFade";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { TextAnimate } from "./ui/TextAnimate";
-import { Particles } from "./ui/Particles";
+
 ---
 
-<section id="projects" class="py-16 relative z-10 overflow-hidden">
-  <!-- Particles Background -->
-  <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
-    <Particles client:visible quantity={100} ease={80} color="#10b981" refresh />
-  </div>
+<section id="projects" class="py-16 relative z-10 overflow-hidden content-auto">
+
 
   <div class="max-w-5xl mx-auto px-6 relative z-10">
     <!-- Section Header -->
@@ -20,7 +17,7 @@ import { Particles } from "./ui/Particles";
       <h2 class="text-4xl md:text-5xl font-bold text-slate-100 tracking-tight flex">
         <TextAnimate client:visible text="Selected Work" delay={0.2} />
       </h2>
-      <ScrollReveal client:load delay={0.2}>
+      <ScrollReveal client:visible delay={0.2}>
         <p class="text-slate-400 text-lg">
           A collection of recent projects spanning web applications, digital systems, and custom server infrastructure.
         </p>
@@ -52,7 +49,7 @@ import { Particles } from "./ui/Particles";
     </div>
 
     <!-- View More -->
-    <ScrollReveal client:load delay={0.4} className="flex justify-center">
+    <ScrollReveal client:visible delay={0.4} className="flex justify-center">
       <a
         href="https://github.com/ucilmenangis"
         target="_blank"
